@@ -19,7 +19,7 @@ import Link from 'next/link';
         <Link href="/signin" className="text-gray-700 font-4 hover:text-gray-900  px-7 rounded-md py-3 bg-yellow-300 text-lg font-medium">
           Sign In
         </Link>
-        <Link href="/signin" className="text-gray-700 hover:text-gray-900  px-5 py-3 text-lg font-medium rounded-md py-3 bg-gray-200 ">
+        <Link href="/signin" className="text-gray-700 hover:text-gray-900  px-5  text-lg font-medium rounded-md py-3 bg-gray-200 ">
           Sign Up
         </Link>
       </div> 
