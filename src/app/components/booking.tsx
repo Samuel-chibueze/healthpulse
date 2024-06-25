@@ -114,10 +114,10 @@ const Booking = () => {
                                     <div className="text-lg font-semibold">${user.price.toFixed(2)}</div>
                                     <div className="flex items-center space-x-1">
                                         {[...Array(Math.floor(user.rating))].map((_, index) => (
-                                            <ion-icon key={index} name="star" className="text-yellow-400"></ion-icon>
+                                            <div key={index} className="text-yellow-400"></div>
                                         ))}
                                         {[...Array(5 - Math.floor(user.rating))].map((_, index) => (
-                                            <ion-icon key={index} name="star-outline" className="text-gray-300"></ion-icon>
+                                            <div key={index} className="text-gray-300"></div>
                                         ))}
                                         <span className="text-gray-600 ml-1">{user.rating.toFixed(1)} ({user.reviews} reviews)</span>
                                     </div>

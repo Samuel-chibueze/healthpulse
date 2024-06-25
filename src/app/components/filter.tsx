@@ -1,38 +1,37 @@
-// Filter.js
-"use client"
-// Filter.js
+// Filter.tsx
+"use client";
 
 import React, { useState, useRef, useEffect } from 'react';
 import { CiFilter } from "react-icons/ci";
 
-const Filter = () => {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
-    const filterButtonRef = useRef(null);
+const Filter: React.FC = () => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const filterButtonRef = useRef<HTMLButtonElement>(null);
 
     // Function to toggle dropdown open/close
     const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
+        setIsDropdownOpen((prev) => !prev);
     };
 
     // Effect to handle click outside dropdown and filter icon
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: MouseEvent) => {
             // Close dropdown if clicking outside of it or on filter icon
             if (
-                dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-                filterButtonRef.current && !filterButtonRef.current.contains(event.target)
+                dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+                filterButtonRef.current && !filterButtonRef.current.contains(event.target as Node)
             ) {
                 setIsDropdownOpen(false);
             }
         };
 
         // Add event listener when component mounts
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside as EventListener);
 
         // Clean up event listener when component unmounts
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside as EventListener);
         };
     }, []);
 

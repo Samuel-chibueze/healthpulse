@@ -1,10 +1,22 @@
-'use client'
-import React, { useState, useEffect, useRef } from "react";
+"use client";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { CiFilter } from "react-icons/ci";
 import Filter from "./filter";
 
-const mockData = [
+interface Company {
+  id: number;
+  name: string;
+  username: string;
+  verified: boolean;
+  image: string;
+  description: string;
+  price: number;
+  rating: number;
+  reviews: number;
+}
+
+const mockData: Company[] = [
   {
     id: 1,
     name: "Company A",
@@ -12,7 +24,7 @@ const mockData = [
     verified: true,
     image: "assets/images/companyA.jpg",
     description: "A description of Company A.",
-    price: 49.00,
+    price: 49.0,
     rating: 4.8,
     reviews: 18
   },
@@ -23,7 +35,7 @@ const mockData = [
     verified: false,
     image: "assets/images/companyB.jpg",
     description: "A description of Company B.",
-    price: 59.00,
+    price: 59.0,
     rating: 4.5,
     reviews: 12
   },
@@ -34,38 +46,38 @@ const mockData = [
     verified: true,
     image: "assets/images/companyC.jpg",
     description: "A description of Company C.",
-    price: 39.00,
+    price: 39.0,
     rating: 4.2,
     reviews: 8
   }
   // Add more companies as needed
 ];
 
-export default function HomeBooking() {
-  const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
-  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const searchInputRef = useRef(null);
-  const dropdownRef = useRef(null);
+const HomeBooking: React.FC = () => {
+  const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState<boolean>(false);
+  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<Company[]>([]);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Toggle search dropdown visibility
   const toggleSearchDropdown = () => {
-    setIsSearchDropdownOpen(!isSearchDropdownOpen);
+    setIsSearchDropdownOpen((prev) => !prev);
     setIsFilterDropdownOpen(false); // Close filter dropdown if open
   };
 
   // Toggle filter dropdown visibility
   const toggleFilterDropdown = () => {
-    setIsFilterDropdownOpen(!isFilterDropdownOpen);
+    setIsFilterDropdownOpen((prev) => !prev);
     setIsSearchDropdownOpen(false); // Close search dropdown if open
   };
 
   // Handle click outside to close dropdowns
-  const handleClickOutside = (event) => {
+  const handleClickOutside = (event: Event) => {
     if (
-      dropdownRef.current && !dropdownRef.current.contains(event.target) &&
-      searchInputRef.current && !searchInputRef.current.contains(event.target)
+      dropdownRef.current && !dropdownRef.current.contains(event.target as Node) &&
+      searchInputRef.current && !searchInputRef.current.contains(event.target as Node)
     ) {
       setIsSearchDropdownOpen(false);
       setIsFilterDropdownOpen(false);
@@ -73,11 +85,11 @@ export default function HomeBooking() {
   };
 
   // Handle search input change
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
     // Simulate search functionality (you can replace this with actual API call)
     const filteredResults = mockData.filter(company =>
-      company.name.toLowerCase().includes(searchQuery.toLowerCase())
+      company.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
     setSearchResults(filteredResults);
   };
@@ -106,7 +118,9 @@ export default function HomeBooking() {
           </button>
         </div>
         <div className="relative" ref={dropdownRef}>
-          <Filter toggleFilterDropdown={toggleFilterDropdown} />
+          <button type="button" onClick={toggleFilterDropdown} className="p-2 border-2 border-gray-300 shadow-sm rounded-xl">
+            <CiFilter size={24} />
+          </button>
           {isFilterDropdownOpen && (
             <div className="absolute right-0 mt-2 w-[850px] bg-white border border-gray-200 shadow-lg rounded-lg z-10">
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2 p-4">
@@ -134,17 +148,17 @@ export default function HomeBooking() {
                         </div>
                       )}
                     </div>
-                    <div className="p-4 flex justify-center items-center">
+                    <div className="p-4 flex flex-col justify-center items-center">
                       <h2 className="text-lg font-semibold">{company.name}</h2>
                       <p className="text-gray-500 mb-2">@{company.username}</p>
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <div className="text-lg font-semibold">${company.price.toFixed(2)}</div>
-                        <div className="flex  justify-end items-center space-x-1">
+                        <div className="flex justify-end items-center space-x-1">
                           {[...Array(Math.floor(company.rating))].map((_, index) => (
-                            <ion-icon key={index} name="star" className="text-yellow-400"></ion-icon>
+                            <div key={index} className="text-yellow-400"></div>
                           ))}
                           {[...Array(5 - Math.floor(company.rating))].map((_, index) => (
-                            <ion-icon key={index} name="star-outline" className="text-gray-300"></ion-icon>
+                            <div key={index} className="text-gray-300"></div>
                           ))}
                           <span className="text-gray-600 ml-1">{company.rating.toFixed(1)} ({company.reviews} reviews)</span>
                         </div>
@@ -159,4 +173,6 @@ export default function HomeBooking() {
       </form>
     </div>
   );
-}
+};
+
+export default HomeBooking;

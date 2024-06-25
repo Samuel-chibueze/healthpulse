@@ -15,7 +15,7 @@ export default function Home() {
       {/* <Hero /> */}
       <Advert />
       <Homebooking />
-      <div className="md:grid grid-cols-3 gap-4 px-5">
+      <div className="md:grid grid-cols-3 gap-4 ">
         <div className="col-span-2">
           <Booking />
         </div>
