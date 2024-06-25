@@ -20,7 +20,7 @@ export default function Navbar() {
         <Link className='font-bold text-black hover:text-gray-600' href={'/signin'}>Signin</Link>
         <Link className='font-bold text-black hover:text-gray-600' href={'/signup'}>Sign up</Link>
         <Link className='font-bold text-black hover:text-gray-600' href={'/dashboard'}>dashboard</Link>
-
+        
       </div>
     </header>
   );

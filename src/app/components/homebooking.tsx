@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { CiFilter } from "react-icons/ci";
+import { IoStar, IoStarOutline } from "react-icons/io5";
 import Filter from "./filter";
 
 interface Company {
@@ -57,7 +58,8 @@ const HomeBooking: React.FC = () => {
   const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState<boolean>(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<Company[]>([]);
+  const [searchResults, setSearchResults] = useState<Company[]>(mockData);
+  const [filters, setFilters] = useState<string[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -87,11 +89,30 @@ const HomeBooking: React.FC = () => {
   // Handle search input change
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
-    // Simulate search functionality (you can replace this with actual API call)
-    const filteredResults = mockData.filter(company =>
-      company.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    setSearchResults(filteredResults);
+    filterResults(event.target.value, filters);
+  };
+
+  // Handle filter change
+  const handleFilterChange = (selectedFilters: string[]) => {
+    setFilters(selectedFilters);
+    filterResults(searchQuery, selectedFilters);
+  };
+
+  const filterResults = (query: string, selectedFilters: string[]) => {
+    let results = mockData;
+
+    if (query) {
+      results = results.filter(company =>
+        company.name.toLowerCase().includes(query.toLowerCase())
+      );
+    }
+
+    if (selectedFilters.length > 0) {
+      // Example filter logic: assuming filters are the company names
+      results = results.filter(company => selectedFilters.includes(company.name));
+    }
+
+    setSearchResults(results);
   };
 
   // Effect to add/remove click outside event listener
@@ -124,7 +145,7 @@ const HomeBooking: React.FC = () => {
           {isFilterDropdownOpen && (
             <div className="absolute right-0 mt-2 w-[850px] bg-white border border-gray-200 shadow-lg rounded-lg z-10">
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-2 p-4">
-                {/* Render filter options here */}
+                <Filter onFilterChange={handleFilterChange} />
               </div>
             </div>
           )}
@@ -155,10 +176,10 @@ const HomeBooking: React.FC = () => {
                         <div className="text-lg font-semibold">${company.price.toFixed(2)}</div>
                         <div className="flex justify-end items-center space-x-1">
                           {[...Array(Math.floor(company.rating))].map((_, index) => (
-                            <div key={index} className="text-yellow-400"></div>
+                            <IoStar key={index} className="text-yellow-400" />
                           ))}
                           {[...Array(5 - Math.floor(company.rating))].map((_, index) => (
-                            <div key={index} className="text-gray-300"></div>
+                            <IoStarOutline key={index} className="text-gray-300" />
                           ))}
                           <span className="text-gray-600 ml-1">{company.rating.toFixed(1)} ({company.reviews} reviews)</span>
                         </div>
