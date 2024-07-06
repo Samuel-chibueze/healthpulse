@@ -1,17 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Logo from '../images/logo_img.png'
 
 export default function Dashboard() {
 
 
     return (
         <div className=' '>
-            <header className="bg-white shadow md:pt-12 pt-6">
+            <header className="bg-white shadow md:pt-12 pt">
                 <div className="container">
                     <div className="flex items-center mb-5 md:space-x-8 space-x-4">
-                        <Link href="/profile">
+                        <Link href="/">
                             <div className="overflow-hidden relative rounded-lg shadow-sm md:w-24 md:h-20 h-12 w-16">
-                                <Image src="/assets/images/brand/WhatsApp Image 2022-12-13 at 12.14.32 AM.jpeg" alt="Company Logo" layout="fill" objectFit="cover" />
+                                <Image src={Logo} alt="Company Logo" layout="fill" objectFit="cover" />
                             </div>
                         </Link>
                         <div className="flex-1">

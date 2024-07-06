@@ -1,14 +1,26 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
-const Profile = () => {
+async function getdoctor(params:any){
+const res = await fetch( `http://127.0.0.1:8000/api/profile/${params}`,{ cache: 'no-store' })
+const data = await res.json()
+console.log(data)
+return data
+}
+
+const Profile = async ({params}: any) => {
+ 
+  const data = await getdoctor(params.user_id)
+  console.log(params.user_id)
+
   return (
     <main className="md:grid grid-cols-3 md:gap-8 gap-20 container mx-auto py-8 px-4 md:px-20 bg-gray-100">
       {/* Main Content */}
       <div className="col-span-2 bg-white shadow-md rounded-lg overflow-hidden">
         {/* Header */}
         <header className="px-6 py-4 border-b">
-          <h1 className="text-3xl font-bold text-gray-800">Ehealthpulse - Technological Healthcare Solutions</h1>
+          <h1 className="text-3xl font-bold text-gray-800">{data.firstname} {data.lastname}</h1>
           <p className="text-sm text-gray-600 mt-2">
             By <span className="text-blue-500">Ehealthpulse Team</span> in <span className="text-blue-500">Healthcare</span>
           </p>
@@ -16,22 +28,17 @@ const Profile = () => {
 
         {/* Slideshow Section */}
         <div className="px-6 mt-6">
-          <div className="relative rounded-lg overflow-hidden">
-            <img src="/path/to/healthcare_image1.jpg" alt="Slideshow Image" className="w-full h-64 object-cover" />
+          <div className="relative rounded-lg overflow-hidden ">
+           
+            <Image
+                                    width={500}
+                                    height={1000}
+                                    src={`http://127.0.0.1:8000/${data.doctor_media_photo}`}
+                                    alt={data.firstname}
+                                    className="w-full h-48 object-cover"
+                                />
           </div>
-          <div className="grid grid-cols-4 gap-4 mt-4">
-            {/* Thumbnails or related images */}
-            <div className="col-span-3 space-y-4">
-              <div className="w-full h-24 bg-gray-200 rounded-lg"></div>
-              <div className="w-full h-24 bg-gray-200 rounded-lg"></div>
-              <div className="w-full h-24 bg-gray-200 rounded-lg"></div>
-            </div>
-            {/* Sidebar with interactive elements */}
-            <div className="col-span-1 flex flex-col justify-between">
-              <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none">Book Appointment</button>
-              <button className="bg-gray-200 text-gray-700 py-2 px-4 rounded-md mt-4 hover:bg-gray-300 focus:outline-none">Add to Wishlist</button>
-            </div>
-          </div>
+      
         </div>
 
         {/* Company Description */}
@@ -42,13 +49,7 @@ const Profile = () => {
           </p>
         </div>
 
-        {/* Vision and Mission */}
-        <div className="px-6 mt-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Vision & Mission</h2>
-          <p className="text-gray-700 leading-relaxed">
-            Our vision is to create a connected healthcare ecosystem that empowers individuals to achieve optimal health and well-being. We are committed to making high-quality healthcare accessible and convenient for all.
-          </p>
-        </div>
+      
 
         {/* Core Values */}
         <div className="px-6 mt-8">

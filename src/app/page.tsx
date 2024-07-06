@@ -6,9 +6,20 @@ import Advert from "./components/advert"
 import Hero from './components/hero_section'
 import Booking from "./components/booking"
 import News_section from "./components/news_section"
+import Labbooking from "./components/labbooking"
 
 
-export default function Home() {
+async function getdoctors() {
+  const res = await fetch('http://127.0.0.1:8000/api/getdoctors/',{ cache: 'no-store' })
+  const data = await res.json()
+  return data
+}
+fetch('https://...', { next: { revalidate: 3600 } })
+
+
+export default async function Home() {
+  const doctors = await getdoctors()
+  console.log(doctors)
   return (
     <main className=''>
 
@@ -17,7 +28,8 @@ export default function Home() {
       <Homebooking />
       <div className="md:grid grid-cols-3 gap-4 ">
         <div className="col-span-2">
-          <Booking />
+          {/* <Labbooking doctors={doctors}/> */}
+          <Booking doctors={doctors} />
         </div>
         <News_section />
       </div>

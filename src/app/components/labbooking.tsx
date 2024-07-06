@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import Image1 from "../images/img/vegetable.jpeg"
+import Image1 from "../images/img/fruit.jpeg"
 import Image from 'next/image';
 
 interface Doctor {
@@ -25,7 +25,7 @@ interface BookingProps {
 type proptype={
 
 }
-const Booking: React.FC<BookingProps> = ({ doctors }) => {
+const labbooking: React.FC<BookingProps> = ({ doctors }) => {
     const data = [
         {
             "id": 1,
@@ -109,38 +109,38 @@ const Booking: React.FC<BookingProps> = ({ doctors }) => {
     ];
 
 console.log(doctors)
+
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold text-center mb-8">Available Services</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {data.map((user) => (
-            <Link href={`/profile/${user.id}`}>
+                {doctors.map((user) => (
+            <Link href={`/profile/${user.user}`}>
                         <div
-                            key={user.id}
+                            key={user.user}
                             className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md"
                         >
                             <div className="relative">
                                 <Image
-                                   width={240}
-                                   height={500}
-                                   
-                                    src={Image1}
-                                    alt={user.name}
-                                    className="w-full object-cover"
+                                    width={240}
+                                    height={500}
+                                    src={`http://127.0.0.1:8000/${user.doctor_media_photo}`}
+                                    alt={user.firstname}
+                                    className="w-full h-48 object-cover"
                                 />
-                                {user.verified && (
+                                {user.lastname && (
                                     <div className="absolute top-0 right-0 bg-green-500 text-white px-2 py-1 m-2 rounded-md text-xs font-semibold">
                                         Verified 
                                     </div>
                                 )}
                             </div>
                             <div className="p-4">
-                                <h2 className="text-lg font-semibold">{user.responsive}</h2>
-                                <p className="text-gray-500 mb-2">@{user.name}</p>
+                                <h2 className="text-lg font-semibold">{user.firstname}</h2>
+                                <p className="text-gray-500 mb-2">@{user.firstname}</p>
                                 <p className="text-sm text-gray-700 mb-4">{user.description}</p>
                                 <div className="flex items-center justify-between">
                                     {/* <div className="text-lg font-semibold">${user.price.toFixed(2)}</div> */}
-                                    <div className="flex items-center space-x-1">
+                                    {/* <div className="flex items-center space-x-1">
                                         {[...Array(Math.floor(user.rating))].map((_, index) => (
                                             <div key={index} className="text-yellow-400"></div>
                                         ))}
@@ -148,7 +148,7 @@ console.log(doctors)
                                             <div key={index} className="text-gray-300"></div>
                                         ))}
                                         <span className="text-gray-600 ml-1">{user.rating.toFixed(1)} ({user.reviews} reviews)</span>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="bg-yellow-400 px-4 py-3 text-center text-white font-semibold cursor-pointer hover:bg-yellow-500">
@@ -165,4 +165,4 @@ console.log(doctors)
     );
 };
 
-export default Booking;
+export default labbooking;
