@@ -18,12 +18,12 @@ export default function signupForm({params}: any) {
 
 
         <div
-            className="mx-auto  bg-cover md:h-[130vh] h-[250vh]  w-full grid md:grid-cols-2 grid-cols-1 gap-5 px-10 bg-white"
+        className="mx-auto  bg-cover md:h-[130vh] pb-30   w-full grid md:grid-cols-2 grid-cols-1 gap-5  bg-white"
         // style={{ backgroundImage: `url(${Image1.src})` }}
         >
             <div className='flex flex-col justify-center items-center '>
-                <form className="lg:py-10 lg:px-8 p-6 space-y-3 relative flex flex-col justify-center items-center bg-white  rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh] ">
-                    <div>
+            <form className="lg:py-10 lg:px-8  space-y-3 relative flex flex-col justify-center items-center bg-white  rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh] ">
+            <div>
                         <Link href="/">
                             <Image
                                 width={500}
@@ -70,7 +70,7 @@ export default function signupForm({params}: any) {
                     </div>
                 </form>
             </div>
-            <div className=' flex flex-col justify-center items-center  md:order-0' >
+            <div className=' md:flex flex-col justify-center items-center  md:order-0 md:visible hidden' >
             <div className='md:h-[100vh] lg:h-[80vh] md:w-[43vw] h-[100vh] w-[90vw] bg-gray-100 rounded-lg shadow-lg flex flex-col justify-start items-center p-10 px-5'>
     <h1 className='text-2xl font-bold mb-5 '>Ehealthpulse Ltd - Company Update</h1>
     <div className='mb-5'>

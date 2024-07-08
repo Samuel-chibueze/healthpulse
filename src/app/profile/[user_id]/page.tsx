@@ -1,21 +1,24 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-async function getdoctor(params:any){
-const res = await fetch( `http://127.0.0.1:8000/api/profile/${params}`,{ cache: 'no-store' })
-const data = await res.json()
-console.log(data)
-return data
-}
+import Image1 from "../../images/img/fruit.jpeg"
+// async function getdoctor(params:any){
+// const res = await fetch( `http://127.0.0.1:8000/api/profile/${params}`,{ cache: 'no-store' })
+// const data = await res.json()
+// console.log(data)
+// return data
+// }
 
 const Profile = async ({params}: any) => {
- 
-  const data = await getdoctor(params.user_id)
+ const data ={
+  firstname:"samtech",
+  lastname:"dane"
+ }
+  // const data = await getdoctor(params.user_id)
   console.log(params.user_id)
 
   return (
-    <main className="md:grid grid-cols-3 md:gap-8 gap-20 container mx-auto py-8 px-4 md:px-20 bg-gray-100">
+    <main className="md:grid grid-cols-3 md:gap-8 gap-20 container mx-auto py-8 mt-24 px-4 md:px-20 bg-gray-100">
       {/* Main Content */}
       <div className="col-span-2 bg-white shadow-md rounded-lg overflow-hidden">
         {/* Header */}
@@ -33,7 +36,7 @@ const Profile = async ({params}: any) => {
             <Image
                                     width={500}
                                     height={1000}
-                                    src={`http://127.0.0.1:8000/${data.doctor_media_photo}`}
+                                    src={Image1}
                                     alt={data.firstname}
                                     className="w-full h-48 object-cover"
                                 />

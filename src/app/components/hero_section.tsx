@@ -3,7 +3,7 @@ import Link from 'next/link';
 
     export default function hero_section(){
         return(<>
-        <div className="bg-blue-400 h-[500px] flex flex-col items-center justify-center gap-10 px-10">
+        <div className="bg-blue-400 h-[650px] flex flex-col items-center justify-center gap-10 px-10 w-full">
             <div className="w-70px">
             <h1 className="text-5xl w-30">
             Upgrade the way
@@ -25,7 +25,7 @@ import Link from 'next/link';
       </div> 
         </div>
 
-        <div className="flex justify-center items-center text-lg gap-10 px-15 py-10 bt-20">
+        <div className="flex justify-center items-center text-lg gap-10 px-10 py-10 bt-20 border border-b-gray-300">
             <p>800,000+ active traders</p>
             <p>Multiple regulatory licenses</p>
             <p> customer support</p>

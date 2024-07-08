@@ -1,38 +1,30 @@
-import Image from "next/image";
+import React, { useContext } from 'react';
 
-// component imports
-import Homebooking from "./components/homebooking"
-import Advert from "./components/advert"
-import Hero from './components/hero_section'
-import Booking from "./components/booking"
-import News_section from "./components/news_section"
-import Labbooking from "./components/labbooking"
+ import Home_section_1 from './components/home_section_1';
+ import Home_section_2 from './components/home_section_2';
+ import Home_section_3 from './components/home_section_3';
+// import Home_section_4 from './components/home_section_4';
+// import Home_section_5 from './components/home_section_5';
+import Hero_section from './components/hero_section';
+const homepage = () => {
 
 
-async function getdoctors() {
-  const res = await fetch('http://127.0.0.1:8000/api/getdoctors/',{ cache: 'no-store' })
-  const data = await res.json()
-  return data
+
+
+    return <div className=' mx-auto  bg-white'>
+
+
+            <Hero_section/>
+        <Home_section_1 />
+         <Home_section_3 />
+         <Home_section_2 /> 
+        
+        {/* <Home_section_4 />
+        <Home_section_5 />  
+        */}
+
+    </div>;
 }
-fetch('https://...', { next: { revalidate: 3600 } })
 
 
-export default async function Home() {
-  const doctors = await getdoctors()
-  console.log(doctors)
-  return (
-    <main className=''>
-
-      {/* <Hero /> */}
-      <Advert />
-      <Homebooking />
-      <div className="md:grid grid-cols-3 gap-4 ">
-        <div className="col-span-2">
-          {/* <Labbooking doctors={doctors}/> */}
-          <Booking doctors={doctors} />
-        </div>
-        <News_section />
-      </div>
-    </main>
-  );
-}
+export default homepage;

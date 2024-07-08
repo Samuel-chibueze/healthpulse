@@ -3,14 +3,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import logoImg from '../images/logo_img.png';
-import { FaUserCircle } from "react-icons/fa";
+import Mainlogo from '../images/logo_img.png';
+import logoImg from '../images/default_profile_photo.jpg';
+import { FaUserCircle } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 
 const Navbar: React.FC = () => {
     const path = usePathname();
+    const [session, setsession] = useState<boolean>(false)
+    const getimage = true
     console.log(path);
-    
+
     const [profileDropdownVisible, setProfileDropdownVisible] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -31,55 +34,61 @@ const Navbar: React.FC = () => {
         setProfileDropdownVisible(!profileDropdownVisible);
     };
 
-    const handleDropdownItemClick = () => {
-        if (profileDropdownVisible) {
-            setProfileDropdownVisible(false);
-        }
+    const handlepath = (path: string) => {
+        const paths = ['/signin', '/signup', '/dashboard','/dashboard/profile'];
+        return paths.includes(path);
     };
 
-    const handlepath=(path:string)=>{
-
-        const paths = ['/signin', '/signup','/dashboard']
-        if(paths.includes(path)){
-            return true
-        }else{
-            return false
-        }
-    }
-
     return (
-        <header className={handlepath(path) ? `hidden` : `flex h-16 items-center justify-between px-4 bg-yellow-200 lg:px-20 shadow-lg`}>
+        <header className={handlepath(path) ? `hidden` : `p-4 fixed top-0 left-0 w-full border-b-2 border-solid flex h-16 items-center justify-between px-4 bg-gray-200 lg:px-5 shadow-lg`}>
             <div className="flex items-center text-xl font-bold">
                 <Link href="/">
-                    <Image src={logoImg} alt="Logo" width={70} height={70} />
+                    <Image src={Mainlogo} alt="Logo" width={70} height={70} />
                 </Link>
             </div>
 
-            <div className="flex gap-4 justify-center items-center">
-                <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/signin">Signin</Link>
-                <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/signup">Sign up</Link>
-                <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/dashboard">Dashboard</Link>
-            </div>
 
-            <div className="relative flex justify-center items-center h-16">
-                <FaUserCircle size={24} onClick={handleDropdownToggle} className="cursor-pointer" />
-                <p className="ml-2 cursor-pointer" onClick={handleDropdownToggle}>username</p>
-                {profileDropdownVisible && (
-                    <div ref={dropdownRef} className="absolute right-0 top-full mt-2 w-48 bg-white shadow-md rounded-md transition-transform transform duration-300">
-                        <ul>
-                            <li>
-                                <Link href="/dashboard" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={handleDropdownItemClick}>My Account</Link>
-                            </li>
-                            <li>
-                                <Link href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={handleDropdownItemClick}>Account Settings</Link>
-                            </li>
-                            <li>
-                                <Link href="/logout" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={handleDropdownItemClick}>Log Out</Link>
-                            </li>
-                        </ul>
+            <div className="flex gap-4 justify-center items-center">
+                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/booking">Book here</Link>
+                    <p className='p-5' onClick={()=>setsession(true)}>switch</p>
+                   
+                </div>
+
+            {session ? (
+                <div className="flex justify-end items-center h-16 border border-l-gray-100 pl-5 relative">
+                    <div onClick={handleDropdownToggle} className="cursor-pointer">
+                        <Image
+                          src={getimage?logoImg:Mainlogo}
+                            alt="profile"
+                            width={50}
+                            height={50}
+                            className="rounded-full object-cover"
+                        />
                     </div>
-                )}
-            </div>
+
+
+                    {profileDropdownVisible && (
+                        <div ref={dropdownRef} className="absolute right-0 top-full mt-2 w-48 bg-white shadow-md rounded-md transition-transform transform duration-300">
+                            <ul>
+                                <li>
+                                    <Link href="/dashboard" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={() => setProfileDropdownVisible(false)}>My Account</Link>
+                                </li>
+                                <li>
+                                    <Link href="/settings" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={() => setProfileDropdownVisible(false)}>Account Settings</Link>
+                                </li>
+                                <li>
+                                    <Link href="/logout" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={() => setProfileDropdownVisible(false)}>Log Out</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <div className="flex gap-4 justify-center items-center">
+                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/signin">Signin</Link>
+                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/signup">Sign up</Link>
+                </div>
+            )}
         </header>
     );
 };

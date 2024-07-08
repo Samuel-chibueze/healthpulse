@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { FcGoogle } from "react-icons/fc";
 import Link from 'next/link';
 
-export default function LoginForm({params}: any) {
+export default function LoginForm({ params }: any) {
     const handleLogin = () => {
         // Handle login logic here
         console.log('Login button clicked');
@@ -18,11 +18,11 @@ export default function LoginForm({params}: any) {
 
 
         <div
-            className="mx-auto  bg-cover md:h-[130vh] h-[250vh]  w-full grid md:grid-cols-2 grid-cols-1 gap-5 px-10 bg-white"
+            className="mx-auto  bg-cover md:h-[130vh] pb-30   w-full grid md:grid-cols-2 grid-cols-1 gap-5  bg-white"
         // style={{ backgroundImage: `url(${Image1.src})` }}
         >
             <div className='flex flex-col justify-center items-center '>
-                <form className="lg:py-10 lg:px-8 p-6 space-y-3 relative flex flex-col justify-center items-center bg-white  rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh] ">
+                <form className="lg:py-10 lg:px-8  space-y-3 relative flex flex-col justify-center items-center bg-white  rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh] ">
                     <div>
                         <Link href="/">
                             <Image
@@ -70,26 +70,26 @@ export default function LoginForm({params}: any) {
                     </div>
                 </form>
             </div>
-            <div className=' flex flex-col justify-center items-center  md:order-0' >
-            <div className='md:h-[100vh] lg:h-[80vh] md:w-[43vw] h-[100vh] w-[90vw] bg-gray-100 rounded-lg shadow-lg flex flex-col justify-start items-center p-10 px-5'>
-    <h1 className='text-2xl font-bold mb-5 '>Ehealthpulse Ltd - Company Update</h1>
-    <div className='mb-5'>
-        <h2 className='text-xl font-semibold py-4'>Who We Are and What We Do</h2>
-        <p>
-            Ehealthpulse Ltd is a technological healthcare company committed to enhancing the quality of healthcare through innovative technology. We offer a user-friendly platform that streamlines the process of booking online consultations, home medical laboratory tests, medical prescriptions, and health educational services.
-        </p>
-    </div>
-    <div className='mb-5'>
-        <h2 className='text-xl font-semibold py-3'>Vision</h2>
-        <p>
-            Our vision is to create a connected healthcare ecosystem that empowers individuals to achieve optimal health and well-being, making high-quality healthcare accessible and convenient for all.
-        </p>
-    </div>
-  
-  
-    
-   
-</div>
+            <div className=' md:flex flex-col justify-center items-center  md:order-0 md:visible hidden' >
+                <div className='md:h-[100vh] lg:h-[80vh] md:w-[43vw] h-[100vh] w-[90vw] bg-gray-100 rounded-lg shadow-lg flex flex-col justify-start items-center p-10 px-5'>
+                    <h1 className='text-2xl font-bold mb-5 '>Ehealthpulse Ltd - Company Update</h1>
+                    <div className='mb-5'>
+                        <h2 className='text-xl font-semibold py-4'>Who We Are and What We Do</h2>
+                        <p>
+                            Ehealthpulse Ltd is a technological healthcare company committed to enhancing the quality of healthcare through innovative technology. We offer a user-friendly platform that streamlines the process of booking online consultations, home medical laboratory tests, medical prescriptions, and health educational services.
+                        </p>
+                    </div>
+                    <div className='mb-5'>
+                        <h2 className='text-xl font-semibold py-3'>Vision</h2>
+                        <p>
+                            Our vision is to create a connected healthcare ecosystem that empowers individuals to achieve optimal health and well-being, making high-quality healthcare accessible and convenient for all.
+                        </p>
+                    </div>
+
+
+
+
+                </div>
 
 
             </div>

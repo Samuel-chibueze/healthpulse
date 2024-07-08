@@ -3,29 +3,29 @@ import Link from 'next/link';
 import Image1 from "../images/img/vegetable.jpeg"
 import Image from 'next/image';
 
-interface Doctor {
-   user: number;
-    firstname: string;
-    lastname: string;
-    doctor_profile_photo: string;
-    doctor_media_photo: string;
-    bios: string;
-    description: string;
-    // support: string;
-    // responsive: string;
-    // price: number;
-    // rating: number;
-    // reviews: number;
-}
+// interface Doctor {
+//    user: number;
+//     firstname: string;
+//     lastname: string;
+//     doctor_profile_photo: string;
+//     doctor_media_photo: string;
+//     bios: string;
+//     description: string;
+//     // support: string;
+//     // responsive: string;
+//     // price: number;
+//     // rating: number;
+//     // reviews: number;
+// }
 
-interface BookingProps {
-    doctors: Doctor[];
-}
+// interface BookingProps {
+//     doctors: Doctor[];
+// }
 
 type proptype={
 
 }
-const Booking: React.FC<BookingProps> = ({ doctors }) => {
+const Booking: React.FC = () => {
     const data = [
         {
             "id": 1,
@@ -108,7 +108,7 @@ const Booking: React.FC<BookingProps> = ({ doctors }) => {
         
     ];
 
-console.log(doctors)
+
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold text-center mb-8">Available Services</h1>
