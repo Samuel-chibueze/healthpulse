@@ -14,7 +14,7 @@ import HorizontalScroll from "../components/HorizontalScroll";
 //   const data = await res.json()
 //   return data
 // }
-fetch('https://...', { next: { revalidate: 3600 } })
+// fetch('https://...', { next: { revalidate: 3600 } })
 
 
 export default async function Home() {

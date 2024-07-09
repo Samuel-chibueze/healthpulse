@@ -5,11 +5,11 @@ import Image1 from "../../images/img/fruit.jpeg"
 import HorizontalScroll from '@/app/components/HorizontalScroll';
 async function getdoctor(params: any) {
   await new Promise(reslove => setTimeout(reslove, 3000))
-  const res = await fetch(`http://127.0.0.1:8000/api/profile/5`, { cache: 'no-store' })
-  const data = await res.json()
-  console.log(data)
+  // const res = await fetch(`http://127.0.0.1:8000/api/profile/5`, { cache: 'no-store' })
+  // const data = await res.json()
+  // console.log(data)
 
-  return data
+  // return data
 
 
 
@@ -99,10 +99,10 @@ export default async function Profile({ params }: any) {
   ];
 
 
-  //  const data ={
-  //   firstname:"samtech",
-  //   lastname:"dane"
-  //  }
+   const names ={
+    firstname:"samtech",
+    lastname:"dane"
+   }
   const data = await getdoctor(params.user_id)
   console.log(params.user_id)
 
@@ -112,7 +112,7 @@ export default async function Profile({ params }: any) {
       <div className="col-span-2 bg-white shadow-md rounded-lg ">
         {/* Header */}
         <header className="px-6 py-4 border-b">
-          <h1 className="text-3xl font-bold text-gray-800">{data.firstname} {data.lastname}</h1>
+          <h1 className="text-3xl font-bold text-gray-800">{names.firstname} {names.lastname}</h1>
           <p className="text-sm text-gray-600 mt-2">
             By <span className="text-blue-500">Ehealthpulse Team</span> in <span className="text-blue-500">Healthcare</span>
           </p>
@@ -125,7 +125,7 @@ export default async function Profile({ params }: any) {
             <Image
               
               src={Image1}
-              alt={data.firstname}
+              alt={names.firstname}
               className="w-full md:h-[60vh] h-[70vh] object-cover"
             />
           </div>
