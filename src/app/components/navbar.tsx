@@ -35,30 +35,28 @@ const Navbar: React.FC = () => {
     };
 
     const handlepath = (path: string) => {
-        const paths = ['/signin', '/signup', '/dashboard','/dashboard/profile'];
+        const paths = ['/signin', '/signup', '/dashboard', '/dashboard/profile'];
         return paths.includes(path);
     };
 
     return (
-        <header className={handlepath(path) ? `hidden` : `p-4 fixed top-0 left-0 w-full border-b-2 border-solid flex h-16 items-center justify-between px-4 bg-gray-200 lg:px-5 shadow-lg`}>
+        <header className={handlepath(path) ? `hidden` : `p-4 fixed top-0 left-0 w-full border-b-2 border-solid flex h-16 items-center justify-between px-4 bg-gray-200 lg:px-5 shadow-lg z-50`}>
             <div className="flex items-center text-xl font-bold">
                 <Link href="/">
                     <Image src={Mainlogo} alt="Logo" width={70} height={70} />
                 </Link>
             </div>
 
-
             <div className="flex gap-4 justify-center items-center">
-                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/booking">Book here</Link>
-                    <p className='p-5' onClick={()=>setsession(true)}>switch</p>
-                   
-                </div>
+                <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/booking">Book here</Link>
+                <p className='p-5 cursor-pointer' onClick={() => setsession(true)}>switch</p>
+            </div>
 
             {session ? (
                 <div className="flex justify-end items-center h-16 border border-l-gray-100 pl-5 relative">
                     <div onClick={handleDropdownToggle} className="cursor-pointer">
                         <Image
-                          src={getimage?logoImg:Mainlogo}
+                            src={getimage ? logoImg : Mainlogo}
                             alt="profile"
                             width={50}
                             height={50}
@@ -66,9 +64,8 @@ const Navbar: React.FC = () => {
                         />
                     </div>
 
-
                     {profileDropdownVisible && (
-                        <div ref={dropdownRef} className="absolute right-0 top-full mt-2 w-48 bg-white shadow-md rounded-md transition-transform transform duration-300">
+                        <div ref={dropdownRef} className="absolute right-0 top-full mt-2 w-48 bg-white shadow-md rounded-md transition-transform transform duration-300 z-50">
                             <ul>
                                 <li>
                                     <Link href="/dashboard" className="block px-4 py-2 text-gray-800 hover:bg-gray-200" onClick={() => setProfileDropdownVisible(false)}>My Account</Link>

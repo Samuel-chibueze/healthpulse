@@ -61,9 +61,9 @@ export default function Profile() {
             <main className="py-12 px-8 md:px-20">
                 <div className="container">
                    
-                    <div className="lg:flex shadow bg-white rounded-md overflow-hidden px-10">
-                        <div className="w-full lg:p-10 p-4 mt-10 border-l flex flex-col items-center justify-center gap-10 px-10">
-                            <div className="flex space-x-4 mb-6 px-10">
+                    <div className="lg:flex shadow bg-white rounded-md overflow-hidden px-5 ">
+                        <div className="w-full lg:p-10 p-4 mt-10 flex flex-col items-center justify-center gap-10 px-3">
+                            <div className="flex space-x-4 mb-6 ">
                                 <button
                                     className={`border-b-4 font-thin border-white  ${activeTab === 'personalinfo' ? 'border-blue-700' : 'bg-white'}`}
                                     onClick={() => setActiveTab('personalinfo')}
