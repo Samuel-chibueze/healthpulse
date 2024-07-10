@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
     };
 
     const handlepath = (path: string) => {
-        const paths = ['/signin', '/signup', '/dashboard', '/dashboard/profile'];
+        const paths = ['/accounts/sign-in', '/accounts/sign-up', '/dashboard', '/dashboard/profile'];
         return paths.includes(path);
     };
 
@@ -82,8 +82,8 @@ const Navbar: React.FC = () => {
                 </div>
             ) : (
                 <div className="flex gap-4 justify-center items-center">
-                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/signin">Signin</Link>
-                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/signup">Sign up</Link>
+                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/accounts/sign-in">Signin</Link>
+                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/accounts/sign-up">Sign up</Link>
                 </div>
             )}
         </header>

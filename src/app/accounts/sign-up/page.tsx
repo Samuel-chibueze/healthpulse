@@ -1,6 +1,6 @@
 import React from 'react';
 import Image1 from '../images/signup-cover.jpeg';
-import Logo from "../images/logo_img.png"
+import Logo from "../../images/logo_img.png"
 import Image from 'next/image';
 
 import { FcGoogle } from "react-icons/fc";
