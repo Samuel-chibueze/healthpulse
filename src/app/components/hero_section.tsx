@@ -6,13 +6,13 @@ import Image1 from '../images/signup-cover.jpeg'
 export default function hero_section() {
   return (<>
     <div className="bg-blue-400 h-[650px] flex flex-col items-center justify-center gap-10 px-10 w-full bg-cover" style={{ backgroundImage: `url(${Image1.src})` }}>
-      <div className="w-70px">
-        <h1 className="text-5xl w-30">
+      <div className="w-50px">
+        <h1 className="text-4xl w-22">
           Upgrade the way
           you trade
         </h1>
       </div>
-      <div>
+      <div className=''>
         <p>Trade with the world’s largest retail broker and benefit from better-than-market conditions.</p>
       </div>
 

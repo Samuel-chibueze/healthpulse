@@ -107,7 +107,7 @@ export default async function Profile({ params }: any) {
   console.log(params.user_id)
 
   return (
-    <main className="md:grid grid-cols-3 md:gap-8 gap-20 container mx-auto py-8 mt-24 px-4 md:px-20 bg-gray-100">
+    <main className="md:grid grid-cols-3 md:gap-8 gap-20 container mx-auto py-8 mt-24 px-2  md:px-10 bg-gray-100">
       {/* Main Content */}
       <div className="col-span-2 bg-white shadow-md rounded-lg ">
         {/* Header */}
@@ -119,14 +119,14 @@ export default async function Profile({ params }: any) {
         </header>
 
         {/* Slideshow Section */}
-        <div className="px-6 mt-6">
+        <div className="px-3 md:px-6 mt-6">
           <div className=" rounded-lg overflow-hidden ">
 
             <Image
               
               src={Image1}
               alt={names.firstname}
-              className="w-full md:h-[60vh] h-[70vh] object-cover"
+              className="w-full md:h-[60vh] h-[50vh] object-cover"
             />
           </div>
 
