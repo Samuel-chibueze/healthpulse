@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
     };
 
     return (
-        <header className={handlepath(path) ? `hidden` : `p-4 fixed top-0 left-0 w-full border-b-2 border-solid flex h-16 items-center justify-between px-4 bg-gray-200 lg:px-5 shadow-lg z-50`}>
+        <header className={handlepath(path) ? `hidden` : `p-4 fixed top-0 left-0 w-full border-b-2 border-solid flex h-16 items-center justify-between px-1 bg-gray-200 lg:px-5 shadow-lg z-50`}>
             <div className="flex items-center text-xl font-bold">
                 <Link href="/">
                     <Image src={Mainlogo} alt="Logo" width={70} height={70} />
@@ -81,10 +81,13 @@ const Navbar: React.FC = () => {
                     )}
                 </div>
             ) : (
-                <div className="flex gap-4 justify-center items-center">
+
+
+                <div className="flex gap-3 justify-center items-center mr-5">
                     <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/accounts/sign-in">Signin</Link>
-                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/accounts/sign-up">Sign up</Link>
+                    <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300 " href="/accounts/sign-up">Sign up</Link>
                 </div>
+
             )}
         </header>
     );
