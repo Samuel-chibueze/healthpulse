@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
                 </Link>
             </div>
 
-            <div className="flex gap-4 justify-center items-center">
+            <div className="flex gap-4 justify-start items-center">
                 <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/booking">Book here</Link>
                 <p className='p-5 cursor-pointer' onClick={() => setsession(true)}>switch</p>
             </div>

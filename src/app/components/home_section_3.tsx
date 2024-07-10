@@ -11,9 +11,9 @@ export default function home_section_4 (){
       <Image className='w-[400px]' src={image} alt="" />
         </div>
 
-        <div className='md:order-1 flex gap-4 flex-col  justify-center items-center  py-10 w-[450px]'>
+        <div className='md:order-1 flex gap-4 flex-col  justify-center items-center  py-10 w-[400px]'>
             <h1  className='text-3xl font-semibold w-full text-center'>Choose what's best for you</h1>
-            <p className='w-[450px] text-center'>Unlike other platforms, AGF lets you pick between stocks, 
+            <p className='w-[380px] text-center'>Unlike other platforms, AGF lets you pick between stocks, 
             US real estate and fixed income, according to your risk appetite.
              That way you can spread your risk and tap into different investments all in one place.</p>
              <Link href={'/signup'}>

@@ -23,12 +23,12 @@ export default function BookingPage() {
           </div>
         </Link>
 
-        <Link href={'/drug-companies'}>
+        {/* <Link href={'/drug-companies'}>
           <div className='rounded-xl bg-gradient-to-r from-red-400 via-re-500 to-red-700 shadow-lg h-[20vh] md:w-[40vw] w-[80vw] flex justify-between items-center px-8 transform transition-transform hover:scale-105'>
             <p className='text-2xl font-bold italic text-white'>Drug Company</p>
             <Image src={Image1} height={150} width={200} alt='drug company image' className='rounded-full border-2 border-white shadow-md' />
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   )

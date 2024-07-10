@@ -15,9 +15,9 @@ export default function home_section_2() {
   <Image className='w-[400px]' src={image} alt="" />
     </div>
 
-    <div className='md:order-1 flex gap-4 flex-col  justify-center items-center  py-10 w-[450px]'>
+    <div className='md:order-1 flex gap-4 flex-col  justify-center items-center  py-10 w-[400px]'>
         <h1  className='text-3xl font-semibold w-full text-center'>Invest your money in dollars</h1>
-        <p className='w-[450px] text-center'>By holding your investments in a stable currency, your money grows more over time and retains its value better.</p>
+        <p className='w-[380px] text-center'>By holding your investments in a stable currency, your money grows more over time and retains its value better.</p>
        <Link href={'/signup'}> 
        <button className='text-blue-500 font-bold' >Start investing now</button> 
        </Link> 
