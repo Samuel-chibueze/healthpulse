@@ -30,7 +30,7 @@ interface formDatat {
 
 export default function signupform() {
 
- 
+
     const [email_error_msg, setemail_error_msg] = useState<string>('')
     const [password_error_msg, setpassword_error_msg] = useState<string>('')
 
@@ -57,9 +57,9 @@ export default function signupform() {
                 setTimeout(() => {
                     router.push('/dashboard');
                 }, 2000);
-                
+
             } else {
-                toast.error(data?.message)
+                toast.error(data?.message || 'Network error try again later ')
             }
 
         } else {
@@ -67,11 +67,11 @@ export default function signupform() {
             const path = result.error.issues[0].path[0]
 
             { path === "email" ? setemail_error_msg(message) : setpassword_error_msg(message) }
-        setTimeout(()=>{
-          setemail_error_msg('')
-          setpassword_error_msg('')
-        },3000);
-           
+            setTimeout(() => {
+                setemail_error_msg('')
+                setpassword_error_msg('')
+            }, 3000);
+
         }
     }
 
