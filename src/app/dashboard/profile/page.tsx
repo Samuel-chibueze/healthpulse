@@ -1,28 +1,41 @@
-"use client"
-import { useState } from 'react';
+
+
+
+import { getSession } from '@/app/lib';
 import Link from 'next/link';
-import Patient_medhistory from "@/app/components/patient_medhistory";
-import Patient_personalinfo from '@/app/components/patient_personalinfo';
-import Patient_lifestyleinfo from '@/app/components/patient_lifestyleinfo';
-import Patient_healthrecords from '@/app/components/patient_healthrecords';
+import { Redirect } from 'next';
+import Dash_profile_render from '../../components/dash_profile_render'
+import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
-export default function Profile() {
-    const [activeTab, setActiveTab] = useState('personalinfo');
+async function getdetails(){
+    const user = cookies().get('user_id')?.value;
+    console.log(user)
+     const rooturl = "http://127.0.0.1:8000/api"
+     const res = await fetch(`${rooturl}/patient_personal_info/${user}`)
+     const data = await res.json() 
+     if(res.ok){
+        return data
+     }else{
+        return console.log('data not fetched')
+     }
+     return data
 
-    const renderActiveTab = () => {
-        switch (activeTab) {
-            case 'personalinfo':
-                return <Patient_personalinfo />;
-            case 'medhistory':
-                return <Patient_medhistory />;
-            case 'lifestyleinfo':
-                return <Patient_lifestyleinfo />;
-            case 'healthrecords':
-                return <Patient_healthrecords />;
-            default:
-                return <Patient_personalinfo />;
-        }
-    };
+
+}
+
+export default async function Profile() {
+    await new Promise(reslove => setTimeout(reslove, 3000))
+    const user = cookies().get('user_id')?.value;
+    const session = await getSession()
+    if(session){
+       const data = await getdetails()  
+       console.log(data)  
+    }else{
+     redirect('/accounts/sign-in')
+    }
+    
+ 
 
     return (
         <div>
@@ -57,43 +70,9 @@ export default function Profile() {
                     </nav>
                 </div>
             </header>
-
-            <main className="py-12 px-8 md:px-20">
-                <div className="container">
-                   
-                    <div className="lg:flex shadow bg-white rounded-md overflow-hidden px-5 ">
-                        <div className="w-full lg:p-10 p-4 mt-10 flex flex-col items-center justify-center gap-10 px-3">
-                            <div className="flex space-x-4 mb-6 ">
-                                <button
-                                    className={`border-b-4 font-thin border-white  ${activeTab === 'personalinfo' ? 'border-blue-700' : 'bg-white'}`}
-                                    onClick={() => setActiveTab('personalinfo')}
-                                >
-                                    Personal Info
-                                </button>
-                                <button
-                                    className={`border-b-4 border-white ${activeTab === 'medhistory' ? 'border-blue-700' : 'bg-white'}`}
-                                    onClick={() => setActiveTab('medhistory')}
-                                >
-                                    Medical History
-                                </button>
-                                <button
-                                    className={`border-b-4 border-white ${activeTab === 'lifestyleinfo' ? 'border-blue-700' : 'bg-white'}`}
-                                    onClick={() => setActiveTab('lifestyleinfo')}
-                                >
-                                    Lifestyle Info
-                                </button>
-                                <button
-                                    className={`border-b-4 border-white ${activeTab === 'healthrecords' ? 'border-blue-700' : 'bg-white'}`}
-                                    onClick={() => setActiveTab('healthrecords')}
-                                >
-                                    Health Records
-                                </button>
-                            </div>
-                            {renderActiveTab()}
-                        </div>
-                    </div>
-                </div>
-            </main>
+            
+            <Dash_profile_render user={user}/>
+           
         </div>
     );
 }

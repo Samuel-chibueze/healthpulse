@@ -7,6 +7,8 @@ import Hero from '../components/hero_section'
 import Booking from "../components/booking"
 import News_section from "../components/news_section"
 import HorizontalScroll from "../components/HorizontalScroll";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 
 // async function getdoctors() {
@@ -123,10 +125,13 @@ export default async function Home() {
       <div className="md:grid grid-cols-3 gap-4 ">
         <div className="col-span-2">
           {/* <Labbooking doctors={doctors}/> */}
-          <Booking  />
+          <Suspense fallback={null}>
+               <Booking  />
+          </Suspense>
+       
         </div>
         <News_section />
-        <HorizontalScroll users={data}/>
+        {/* <HorizontalScroll users={data}/> */}
       </div>
     </main>
   );

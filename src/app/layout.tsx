@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { Toaster } from "react-hot-toast";
 
 import Navbar from "./components/navbar";
 import Footer from './components/footer';
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="!scroll-smooth">
       <body className={`${inter.className} bg-gray-100 text-gray-900`}>
         <Navbar />
         <NextTopLoader
@@ -36,6 +36,7 @@ export default function RootLayout({
   zIndex={1600}
   showAtBottom={false}
 />
+<Toaster position="top-right"/>
         {children}
         <Footer />
       </body>

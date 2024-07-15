@@ -1,10 +1,29 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '../images/logo_img.png'
+import { getSession } from '../lib';
+import { cookies } from 'next/headers';
 
-export default function Dashboard() {
+async function getpatient_details (){
+    const user_id =  cookies().get('user_id')?.value
+  console.log(user_id)
 
+    const rooturl = "http://127.0.0.1:8000/api"
 
+    const res = await fetch(`${rooturl}/patient_profile/${user_id}`)
+    const data = await res.json()
+    return data
+}
+export default async function Dashboard() {
+  await new Promise(reslove => setTimeout(reslove, 1000))
+const session =  await getSession()
+const profile = await getpatient_details()
+
+if(session){
+  console.log('session on')
+}else{
+  console.log("redirected")
+}
     return (
         <div className=' '>
             <header className="bg-white shadow md:pt-12 pt">
@@ -35,68 +54,94 @@ export default function Dashboard() {
             </header>
 
             <main className="py-8 flex justify-center items-center px-5">
-                <div className="container md:grid grid-cols-3 gap-10">
-                    <div className='col-span-2 '>
-                        <div className='flex flex-col items-center justify-center'>
-                            <div className="md:text-2xl text-xl font-semibold mb-5">Your Recent Activity</div>
-                            <div className="grid md:grid-cols-3 grid-cols-3 gap-5">
-                                <div className="bg-white shadow rounded-md sm:p-5 p-4">
-                                    <div className="text-sm">Logged In</div>
-                                    <div className="font-semibold md:text-2xl text-xl mt-3">01/01/2024</div>
-                                </div>
-                                <div className="bg-white shadow rounded-md sm:p-5 p-4">
-                                    <div>Updated Profile</div>
-                                    <div className="font-semibold md:text-2xl text-xl mt-3">Personal Info</div>
-                                </div>
-                                <div className="bg-white shadow rounded-md sm:p-5 p-4">
-                                    <div>Consultation Booked</div>
-                                    <div className="font-semibold md:text-2xl text-xl mt-3">$50.00</div>
-                                </div>
+            <div className="container md:grid grid-cols-3 gap-10">
+                <div className="col-span-2">
+                    <div className='flex flex-col items-center justify-center'>
+                        <div className="md:text-2xl text-xl font-semibold mb-5">Your Recent Activity</div>
+                        <div className="grid md:grid-cols-3 grid-cols-3 gap-5">
+                            <div className="bg-white shadow rounded-md sm:p-5 p-4">
+                                <div className="text-sm">Logged In</div>
+                                <div className="font-semibold md:text-2xl text-xl mt-3">01/01/2024</div>
                             </div>
-                        </div>
-                        <div className="shadow bg-white rounded-md mt-10">
-                            <div className="border-b flex items-center justify-between md:p-5 p-3">
-                                <div>
-                                    <h2 className="text-lg font-semibold">Latest Updates</h2>
-                                </div>
-                                <Link href="#">See all</Link>
+                            <div className="bg-white shadow rounded-md sm:p-5 p-4">
+                                <div>Updated Profile</div>
+                                <div className="font-semibold md:text-2xl text-xl mt-3">Personal Info</div>
                             </div>
-                            <div className="lg:max-h-96" data-simplebar>
-                                <ul className="divide-y">
-                                    <li className="flex items-start md:space-x-6 space-x-3 md:p-5 p-3">
-                                        <Link href="#">
-                                            <div className="h-12 md:h-16 md:w-24 overflow-hidden relative rounded-md shadow w-12">
-                                                <Image src="/assets/images/images (2).jfif" alt="Update" layout="fill" objectFit="cover" />
-                                            </div>
-                                        </Link>
-                                        <div className="flex-1 flex justify-between">
-                                            <div className="flex-1">
-                                                <Link href="#">New Online Consultation Feature</Link>
-                                                <div className="flex space-x-3 items-center text-sm md:mt-1.5 text-gray-500">
-                                                    <span className="font-semibold text-sm text-blue-500">Active</span>
-                                                    <div className="md:block hidden">·</div>
-                                                    <span className="font-medium text-sm">Engagement 212 users</span>
-                                                </div>
-                                            </div>
-                                            <div className="mb-0 sm:block hidden">
-                                                <div className="bg-green-100 text-green-600 font-semibold inline-block leading-4 mt-3 px-3 py-1.5 rounded-full text-base">Free</div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    {/* Add more list items as needed */}
-                                </ul>
+                            <div className="bg-white shadow rounded-md sm:p-5 p-4">
+                                <div>Consultation Booked</div>
+                                <div className="font-semibold md:text-2xl text-xl mt-3">$50.00</div>
                             </div>
                         </div>
                     </div>
+                    <div className="shadow bg-white rounded-md mt-10">
+                        <div className="border-b flex items-center justify-between md:p-5 p-3">
+                            <div>
+                                <h2 className="text-lg font-semibold">Latest Updates</h2>
+                            </div>
+                            <Link href="#">See all</Link>
+                        </div>
+                        <div className="lg:max-h-96" data-simplebar>
+                            <ul className="divide-y">
+                                <li className="flex items-start md:space-x-6 space-x-3 md:p-5 p-3">
+                                    <Link href="#">
+                                        <div className="h-12 md:h-16 md:w-24 overflow-hidden relative rounded-md shadow w-12">
+                                            <Image src={profile.patient_profile_photo} alt="Profile Photo" layout="fill" objectFit="cover" />
+                                        </div>
+                                    </Link>
+                                    <div className="flex-1 flex justify-between">
+                                        <div className="flex-1">
+                                            <Link href="#">New Online Consultation Feature</Link>
+                                            <div className="flex space-x-3 items-center text-sm md:mt-1.5 text-gray-500">
+                                                <span className="font-semibold text-sm text-blue-500">Active</span>
+                                                <div className="md:block hidden">·</div>
+                                                <span className="font-medium text-sm">Engagement 212 users</span>
+                                            </div>
+                                        </div>
+                                        <div className="mb-0 sm:block hidden">
+                                            <div className="bg-green-100 text-green-600 font-semibold inline-block leading-4 mt-3 px-3 py-1.5 rounded-full text-base">Free</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                {/* Add more list items as needed */}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                    <div className="p-6 rounded-md  col-span-1 mt-10">
+                <div className="col-span-1 mt-10">
+                    <div className="shadow bg-white rounded-md p-6">
+                        <div className="flex items-center space-x-4 mb-6">
+                            <div className="relative w-24 h-24">
+                                <Image src={profile.patient_profile_photo} alt="Profile Photo" layout="fill" objectFit="cover" className="rounded-full" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold">{profile.first_name} {profile.second_name} {profile.last_name}</h3>
+                                <p className="text-sm text-gray-500">{profile.bio}</p>
+                            </div>
+                        </div>
+                        <div className="space-y-4">
+                            <div className="flex justify-between">
+                                <span className="font-medium">Age:</span>
+                                <span>{profile.age}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span className="font-medium">Gender:</span>
+                                <span>{profile.gender}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span className="font-medium">Verified:</span>
+                                <span>{profile.is_verified ? 'Yes' : 'No'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="p-6 rounded-md bg-gray-100 mt-10">
                         <span className="block font-medium text-lg mb-4">Activity History</span>
-                        <table className="divide-y divide-gray-200 bg-gray-100 sm:w-[10px]">
-                            <thead className="bg-gray-50">
+                        <table className="divide-y divide-gray-200 bg-gray-50 w-full">
+                            <thead className="bg-gray-100">
                                 <tr>
-                                    <th className="w-2/6 py-3">Action</th>
-                                    <th className="w-2/6 py-3">Date</th>
-                                    <th className="w-1/6 py-3">Details</th>
+                                    <th className="w-1/3 py-3">Action</th>
+                                    <th className="w-1/3 py-3">Date</th>
+                                    <th className="w-1/3 py-3">Details</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200">
@@ -110,7 +155,8 @@ export default function Dashboard() {
                         </table>
                     </div>
                 </div>
-            </main>
+            </div>
+        </main>
         </div>
     );
 }
