@@ -19,6 +19,8 @@ import HorizontalScroll from '@/app/components/HorizontalScroll';
 
 export default async function Profile({ params }: any) {
 
+  console.log(params)
+
   const dummydata = [
     {
       id: 1,
@@ -167,7 +169,7 @@ export default async function Profile({ params }: any) {
           <h2 className="text-2xl font-bold text-gray-800 mb-4 "></h2>
 
 
-          <HorizontalScroll users={dummydata} />
+          {/* <HorizontalScroll users={dummydata} /> */}
 
 
         </div>

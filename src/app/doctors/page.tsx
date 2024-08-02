@@ -117,7 +117,7 @@ export default async function Home() {
     <main className=''>
 
       {/* <Hero /> */}
-      <Advert />
+      {/* <Advert /> */}
       <Homebooking />
       <div className="md:grid grid-cols-3 gap-4 ">
         <div className="col-span-2">

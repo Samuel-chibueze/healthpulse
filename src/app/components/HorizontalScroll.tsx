@@ -52,7 +52,7 @@ const HorizontalScroll: React.FC<BookingProps> = ({ users }) => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-1">
                     {[...Array(Math.floor(user.rating))].map((_, index) => (
-                      <div key={index} className="text-yellow-400">★</div>
+                      <div key={index} className="text-[#4576BC]">★</div>
                     ))}
                     {[...Array(5 - Math.floor(user.rating))].map((_, index) => (
                       <div key={index} className="text-gray-300">☆</div>
@@ -61,7 +61,7 @@ const HorizontalScroll: React.FC<BookingProps> = ({ users }) => {
                   </div>
                 </div>
               </div>
-              <div className="bg-yellow-400 px-4 py-3 text-center text-white font-semibold cursor-pointer hover:bg-yellow-500">
+              <div className="bg-[#4576BC] px-4 py-3 text-center text-white font-semibold cursor-pointer hover:bg-[#17345c]">
                 Book Now
               </div>
             </div>

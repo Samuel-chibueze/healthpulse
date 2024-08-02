@@ -18,21 +18,12 @@ const handlepath = (path: string) => {
         return false
     };
 
-    const session = cookies().get('session')?.value as string
-    console.log(session)
+    const session = cookies().get('session')?.value as string || false
     
-    const headersList = headers();
-    // read the custom x-url header
     
-   
-    const header = headers()
-    
-    console.log(header);
-    const pathname = headersList.get('x-url') || "";
-   
-    
+ 
     return (
-        <header className={handlepath(pathname) ? `hidden` : `p-4  top-0 left-0 right-0 w-full border-b-2 border-solid flex h-16 items-center justify-between px-1 bg-gray-200 lg:px-5 shadow-2xl z-50`}>
+        <header className={`p-4 text-[#4576BC]  top-0 left-0 right-0 w-full border-b-2 border-solid flex h-16 items-center justify-between bg-gray-200 lg:px-5  z-50`}>
             <div className="flex items-center text-xl font-bold">
                 <Link href="/">
                     <Image src={Mainlogo} alt="Logo" width={70} height={70} />
@@ -40,7 +31,7 @@ const handlepath = (path: string) => {
             </div>
 
             <div className="flex gap-4 justify-start items-center">
-                <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/booking">Book here</Link>
+                <Link className="font-bold  hover:text-gray-600 transition-colors duration-300" href="/booking">Book here</Link>
                 {/* <p className='p-5 cursor-pointer' onClick={() => setsession(true)}>switch</p> */}
             </div>
 

@@ -20,7 +20,7 @@ export interface Session {
 
 
   export interface NavbarClientProps {
-    session: string | null; // session as string or null if not available
+    session: string | false; // session as string or null if not available
   }
   
 
@@ -95,8 +95,8 @@ const NavbarClient: React.FC<NavbarClientProps> = (props) => {
         </div>
       ) : (
         <div className="flex gap-5 justify-center items-center mr-14">
-          <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300" href="/accounts/sign-in">Signin</Link>
-          <Link className="font-bold text-black hover:text-gray-600 transition-colors duration-300 " href="/accounts/sign-up">Sign up</Link>
+          <Link className="font-bold  hover:text-gray-600 transition-colors duration-300" href="/accounts/sign-in">Signin</Link>
+          <Link className="font-bold hover:text-gray-600 transition-colors duration-300 " href="/accounts/sign-up">Sign up</Link>
         </div>
       )}
     </div>

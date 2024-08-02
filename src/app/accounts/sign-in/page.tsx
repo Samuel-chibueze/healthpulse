@@ -2,6 +2,8 @@ import React from 'react';
 import Image1 from '../images/signup-cover.jpeg';
 import Logo from "../../images/logo_img.png"
 import Image from 'next/image';
+import BackgroundImage1 from '@/app/images/Online-Doctor-Consultations.png'
+
 
 import { FcGoogle } from "react-icons/fc";
 import Link from 'next/link';
@@ -26,8 +28,13 @@ export default function LoginForm({ params }: any) {
                 <Signinform/>
             </div>
             <div className=' md:flex flex-col justify-center items-center  md:order-0 md:visible hidden' >
-                <div className='md:h-[100vh] lg:h-[80vh] md:w-[43vw] h-[100vh] w-[90vw] bg-gray-100 rounded-lg shadow-lg flex flex-col justify-start items-center p-10 px-5'>
-                    <h1 className='text-2xl font-bold mb-5 '>Ehealthpulse Ltd - Company Update</h1>
+                <div className='md:h-[100vh] lg:h-[80vh] md:w-[43vw] h-[100vh] w-[90vw] bg-gray-100 rounded-lg shadow-lg flex flex-col justify-start items-center p-10 px-5'  style={{
+                    backgroundImage: `url(${BackgroundImage1.src})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  
+                }}>
+                    {/* <h1 className='text-2xl font-bold mb-5 '>Ehealthpulse Ltd - Company Update</h1>
                     <div className='mb-5'>
                         <h2 className='text-xl font-semibold py-4'>Who We Are and What We Do</h2>
                         <p>
@@ -39,7 +46,7 @@ export default function LoginForm({ params }: any) {
                         <p>
                             Our vision is to create a connected healthcare ecosystem that empowers individuals to achieve optimal health and well-being, making high-quality healthcare accessible and convenient for all.
                         </p>
-                    </div>
+                    </div> */}
 
 
 

@@ -8,6 +8,8 @@ import { redirect, useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
 import ReactFlagsSelect from 'react-flags-select';
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa6";
 import { z } from 'zod';
 import { SignupAction } from '@/app/serveractions';
 import { useState, useEffect, useRef } from 'react';
@@ -49,7 +51,6 @@ export default function SignupForm() {
 
   const handlesubmit = async (formData: FormData) => {
     remove_error();
-
     const newform = {
       firstname: formData.get('firstname'),
       lastname: formData.get('lastname'),
@@ -85,9 +86,9 @@ export default function SignupForm() {
 
       if (data?.success) {
         toast.success(data?.message);
-        setTimeout(() => {
+      
           router.push('/booking');
-        }, 2000);
+     
 
         // Reset the form after submission
         if (formRef.current) {
@@ -128,12 +129,8 @@ export default function SignupForm() {
   return (
     <form
       ref={formRef}
-      onSubmit={e => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        handlesubmit(formData);
-      }}
-      className="lg:py-10 lg:px-8 space-y-3 relative flex flex-col justify-center items-center bg-white rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh]"
+      action={handlesubmit}
+      className=" flex flex-col justify-center items-center bg-white rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh]"
     >
       <h1 className="lg:text-2xl text-2xl font-semibold mb-6">Sign up</h1>
       <p className="text-xl pt-4 pb-10">Hey friend! Welcome to healthpulse</p>
@@ -148,7 +145,7 @@ export default function SignupForm() {
             name="firstname"
             className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-[35vw] md:w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
-          <p className="text-red-600 font-semibold text-md py-2">{firstname_error_msg}</p>
+          <p className="text-red-600  text-md py-2">{firstname_error_msg}</p>
         </div>
         <div className="w-full">
           <label htmlFor="lastname" className="mb-1 block font-bold">
@@ -159,7 +156,7 @@ export default function SignupForm() {
             name="lastname"
             className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-[35vw] md:w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
-          <p className="text-red-600 font-semibold text-md py-2 ml-5">{lastname_error_msg}</p>
+          <p className="text-red-600  text-md py-2 ml-5">{lastname_error_msg}</p>
         </div>
       </div>
 
@@ -172,7 +169,7 @@ export default function SignupForm() {
           name="email"
           className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
-        <p className="text-red-600 font-semibold text-md py-2 ml-5">{email_error_msg}</p>
+        <p className="text-red-600  text-md py-2 ml-5">{email_error_msg}</p>
       </div>
 
       <div className="flex justify-between gap-6">
@@ -185,7 +182,7 @@ export default function SignupForm() {
             name="phonenumber"
             className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-[35vw] md:w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
           />
-          <p className="text-red-600 font-semibold text-md py-2 ml-5">{contact_info_error_msg}</p>
+          <p className="text-red-600 text-md py-2 ml-5">{contact_info_error_msg}</p>
         </div>
         <div className="w-full">
           <label htmlFor="gender" className="mb-1 block font-bold">
@@ -200,7 +197,7 @@ export default function SignupForm() {
             <option value="M">Male</option>
             <option value="F">Female</option>
           </select>
-          <p className="text-red-600 font-semibold text-md py-2 ml-5">{gender_error_msg}</p>
+          <p className="text-red-600  text-md py-2 ml-5">{gender_error_msg}</p>
         </div>
       </div>
 
@@ -213,7 +210,18 @@ export default function SignupForm() {
           name="password"
           className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
-        <p className="text-red-600 font-semibold text-md py-2 ml-5">{password_error_msg}</p>
+        <p className="text-red-600 text-md py-2 ml-5">{password_error_msg}</p>
+      </div>
+      <div className="w-full">
+        <label htmlFor="password" className="mb-1 block font-bold">
+         confirm Password
+        </label>
+        <input
+          type="password"
+          name="confirm_password"
+          className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
+        />
+        <p className="text-red-600 text-md py-2 ml-5">{password_error_msg}</p>
       </div>
       <Button />
       <div className="uk-heading-line uk-text-center py-2">

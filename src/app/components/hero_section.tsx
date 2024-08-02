@@ -17,7 +17,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-center items-center text-lg gap-4 md:gap-8 font-bold px-10 py-10 bg-gray-100 border-t border-gray-300">
+      <div className="flex flex-col md:flex-row justify-center items-center text-white text-lg gap-4 md:gap-8 font-bold px-10 py-10 bg-[#6da6f5] border-t border-gray-300">
         <p>800,000+ active traders</p>
         <p>Multiple regulatory licenses</p>
         <p>24/7 customer support</p>

@@ -65,7 +65,7 @@ export default function BookingSection(){
 
         <hr className="my-2.5" />
         <div className="flex space-x-3 justify-center items-center">
-          <button type="submit" className="bg-green-500 flex font-semibold justify-center rounded-lg text-white w-full h-[50px] hover:text-white items-center">
+          <button type="submit" className="bg-[#17345c] flex font-semibold justify-center rounded-lg text-white w-full h-[50px] hover:text-white items-center">
             Book Now
           </button>
         </div>

@@ -9,7 +9,7 @@ import Hero_section from './components/hero_section';
 const homepage = () => {
 
 
-    return <div className=' mx-auto  bg-white'>
+    return     <div className="mx-auto bg-white max-w-screen-xl overflow-hidden shadow-lg">
 
 
             <Hero_section/>

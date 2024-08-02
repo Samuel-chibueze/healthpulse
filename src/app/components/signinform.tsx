@@ -39,6 +39,7 @@ export default function signinform() {
     // const [state, formAction] = useFormState(Signupaction, initialstate)
 
     async function handlesubmit(formData: FormData) {
+      
         console.log(formData)
         setemail_error_msg('')
         setpassword_error_msg('')
@@ -55,11 +56,12 @@ export default function signinform() {
 
             if (data?.success) {
                 toast.success(data?.message)
-                setTimeout(() => {
                     router.push('/booking');
-                }, 2000);
+              
                 
             } else {
+                console.log(data)
+                console.log(data?.message)
                 toast.error(data?.message || 'Network error try again later ')
             }
 
@@ -104,7 +106,7 @@ export default function signinform() {
                     name="email"
                     className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
                 />
-                <p className='text-red-600 font-semibold text-md py-2 ml-5'>{email_error_msg}</p>
+                <p className='text-red-600  text-md py-2 ml-5'>{email_error_msg}</p>
             </div>
             <div className="w-full">
                 <label htmlFor="password" className="mb-1 block font-bold">Password</label>
@@ -113,7 +115,7 @@ export default function signinform() {
                     name="password"
                     className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
                 />
-                <p className='text-red-600 font-semibold text-md py-2 ml-5'>{password_error_msg}</p>
+                <p className='text-red-600 text-md py-2 ml-5'>{password_error_msg}</p>
             </div>
             <Button />
             <div className="uk-heading-line uk-text-center py-2"><span>Or</span></div>
@@ -122,7 +124,7 @@ export default function signinform() {
                 </div>
             </div>
             <div className='flex flex-col justify-center items-center py-5'>
-                <p>Already have an account? <Link className='text-blue-800' href={'/accounts/sign-up'}>signup</Link></p>
+                <p>Already have an account? <Link className='text-blue-800' href={'/accounts/sign-up'}>sign up</Link></p>
             </div>
         </form>
     )
