@@ -1,5 +1,5 @@
 import React from 'react';
-import image from "../images/wallet_4.jpeg"
+import image from "../images/Online-Doctor-Consult.png"
 import Image from 'next/image';
 import Link from 'next/link';
 

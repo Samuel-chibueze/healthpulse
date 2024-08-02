@@ -15,15 +15,9 @@ async function getpatient_details (){
     return data
 }
 export default async function Dashboard() {
-  await new Promise(reslove => setTimeout(reslove, 1000))
 const session =  await getSession()
 const profile = await getpatient_details()
 
-if(session){
-  console.log('session on')
-}else{
-  console.log("redirected")
-}
     return (
         <div className=' '>
             <header className="bg-white shadow md:pt-12 pt">

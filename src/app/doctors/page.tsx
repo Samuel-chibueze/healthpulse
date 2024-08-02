@@ -19,7 +19,6 @@ import Loading from "./loading";
 // fetch('https://...', { next: { revalidate: 3600 } })
 
 async function getdoctor(params: any) {
-  await new Promise(reslove => setTimeout(reslove, 3000))
   // const res = await fetch(`http://127.0.0.1:8000/api/profile/5`, { cache: 'no-store' })
   // const data = await res.json()
   // console.log(data)
@@ -31,8 +30,6 @@ async function getdoctor(params: any) {
 }
 
 export default async function Home() {
-
-  await new Promise(reslove => setTimeout(reslove, 3000))
   // const doctors = await getdoctors()
   // console.log(doctors)
   

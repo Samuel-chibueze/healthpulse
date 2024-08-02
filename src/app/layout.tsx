@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
-
 import Navbar from "./components/navbar";
 import Footer from './components/footer';
 import NextTopLoader from 'nextjs-toploader';
-
+import GlobalContextProvider from "./components/contextprovider"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,6 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body className={`${inter.className} bg-gray-100 text-gray-900`}>
+        
+
+        
         <Navbar />
         <NextTopLoader
   color="#2299DD"
@@ -37,8 +39,11 @@ export default function RootLayout({
   showAtBottom={false}
 />
 <Toaster position="top-right"/>
-        {children}
+<GlobalContextProvider>
+{children}
+</GlobalContextProvider>
         <Footer />
+      
       </body>
     </html>
   );

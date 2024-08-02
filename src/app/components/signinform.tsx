@@ -56,7 +56,7 @@ export default function signinform() {
             if (data?.success) {
                 toast.success(data?.message)
                 setTimeout(() => {
-                    router.push('/dashboard');
+                    router.push('/booking');
                 }, 2000);
                 
             } else {

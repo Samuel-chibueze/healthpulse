@@ -1,5 +1,7 @@
 import Signupform from "@/app/components/signupform";
-
+import Link from "next/link";
+import Image from 'next/image';
+import Logo from '@/app/images/logo_img.png'
 export default function signupForm({ params }: any) {
 
 
@@ -12,6 +14,18 @@ export default function signupForm({ params }: any) {
         // style={{ backgroundImage: `url(${Image1.src})` }}
         >
             <div className='flex flex-col justify-center items-center '>
+            <div>
+                <Link href="/">
+                    <Image
+                        width={500}
+                        height={100}
+                        src={Logo}
+                        alt={"image"}
+                        className="w-full h-48 object-cover"
+                    />
+                </Link>
+
+            </div>
                 <Signupform />
             </div>
             <div className=' md:flex flex-col justify-center items-center  md:order-0 md:visible hidden' >

@@ -1,7 +1,8 @@
 "use client"
 import Link from 'next/link';
-import Image1 from "../images/img/vegetable.jpeg"
+import Image1 from "../images/default_profile_photo.jpg"
 import Image from 'next/image';
+import { mycontext } from './contextprovider';
 
 // interface Doctor {
 //    user: number;
@@ -26,6 +27,8 @@ type proptype={
 
 }
 const Booking: React.FC = () => {
+    const {visible, setvisible} = mycontext()
+    console.log(visible)
     const data = [
         {
             "id": 1,
@@ -122,7 +125,7 @@ const Booking: React.FC = () => {
                             <div className="relative">
                                 <Image
                                    width={240}
-                                   height={500}
+                                   height={300}
                                    
                                     src={Image1}
                                     alt={user.name}

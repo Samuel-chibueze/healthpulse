@@ -23,7 +23,7 @@ export default function DashProfileRender({ user }) {
                 if (res.status === 200) {
                     setPatientDetails(data);
                 } else {
-                    console.log('Data not fetched, status code:', res.status);
+                console.log('Data not fetched, status code:', res.status);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -53,6 +53,14 @@ export default function DashProfileRender({ user }) {
         }
     };
 
+    const active=()=>{
+        if(active===""){
+          return true
+        }else{
+            return true
+        }
+    }
+
     return (
         <main className="py-12 px-8 md:px-20">
             <div className="container">
@@ -60,7 +68,7 @@ export default function DashProfileRender({ user }) {
                     <div className="w-full lg:p-10 p-4 mt-10 flex flex-col items-center justify-center gap-10 px-3">
                         <div className="flex space-x-4 mb-6">
                             <button
-                                className={`border-b-4 font-thin border-white ${activeTab === 'personalinfo' ? 'border-blue-700' : 'bg-white'}`}
+                                className={active() === 'personalinfo' ? 'border-6 border-blue-700' : 'border-b-4 font-thin border-white' }
                                 onClick={() => setActiveTab('personalinfo')}
                             >
                                 Personal Info

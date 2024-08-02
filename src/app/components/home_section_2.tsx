@@ -5,7 +5,7 @@ import image3 from "../images/western-union.png"
 import image4 from "../images/techstars.png"
 
 import Image from 'next/image'
-import image from "../images/wallet_3.jpeg"
+import image from "../images/Online_Doctor.png"
 
 import Link from 'next/link'
 export default function home_section_2() {

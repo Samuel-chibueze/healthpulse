@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import image1 from "../images/img/vegetable.jpeg";
+import image1 from "../images/default_profile_photo.jpg";
 
 interface User {
   id: number;

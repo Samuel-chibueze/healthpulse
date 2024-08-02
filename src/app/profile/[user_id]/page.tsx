@@ -1,20 +1,21 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Image1 from "../../images/img/fruit.jpeg"
+import Image1 from "../../images/default_profile_photo.jpg"
+import Bookingmodel from '@/app/components/bookingmodel';
 import Bookingsection from '@/app/components/bookingsection';
 import HorizontalScroll from '@/app/components/HorizontalScroll';
-async function getdoctor(params: any) {
-  await new Promise(reslove => setTimeout(reslove, 3000))
-  // const res = await fetch(`http://127.0.0.1:8000/api/profile/5`, { cache: 'no-store' })
-  // const data = await res.json()
-  // console.log(data)
+// async function getdoctor(params: any) {
+//   await new Promise(reslove => setTimeout(reslove, 3000))
+//   // const res = await fetch(`http://127.0.0.1:8000/api/profile/5`, { cache: 'no-store' })
+//   // const data = await res.json()
+//   // console.log(data)
 
-  // return data
+//   // return data
 
 
 
-}
+// }
 
 export default async function Profile({ params }: any) {
 
@@ -100,15 +101,19 @@ export default async function Profile({ params }: any) {
   ];
 
 
-   const names ={
-    firstname:"samtech",
-    lastname:"dane"
-   }
-  const data = await getdoctor(params.user_id)
-  console.log(params.user_id)
+  const names = {
+    firstname: "samtech",
+    lastname: "dane"
+  }
+  // const data = await getdoctor(params.user_id)
+  // console.log(params.user_id)
 
   return (
+
     <main className="md:grid grid-cols-3 md:gap-8 gap-20 container mx-auto py-8 mt-24 px-2  md:px-10 bg-gray-100">
+
+      <Bookingmodel />
+
       {/* Main Content */}
       <div className="col-span-2 bg-white shadow-md rounded-lg ">
         {/* Header */}
@@ -124,7 +129,7 @@ export default async function Profile({ params }: any) {
           <div className=" rounded-lg overflow-hidden ">
 
             <Image
-              
+
               src={Image1}
               alt={names.firstname}
               className="w-full md:h-[60vh] h-[50vh] object-cover"

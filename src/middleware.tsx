@@ -1,31 +1,25 @@
 import { NextResponse } from 'next/server';
 import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/dist/server/api-utils';
+import logoutroute from "@/app/serveractions"
 
 
 
 
-export function middleware(request: Request) {
+export async function middleware(request: Request) {
 
-
-    const headersList = headers();
-
-  // Store current request url in a custom header, which you can read later
-  const fullUrl = headersList.get('referer') || "";
-  const urlParts = fullUrl.split('/');
-    const path  = '/' + urlParts.slice(3).join('/');
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-url', path);
  const session = cookies().get('session')?.value || null
+ const userid = cookies().get('user_id')?.value || null
   
   if(session){
     return NextResponse.next({
       request: {
         // Apply new request headers
-        headers: requestHeaders,
+      
       }
     });
   }else{
+      
     return NextResponse.redirect(new URL('/accounts/sign-in', request.url))
   }
 
