@@ -8,7 +8,7 @@ import Booking from "../components/booking"
 import News_section from "../components/news_section"
 import HorizontalScroll from "../components/HorizontalScroll";
 import { Suspense } from "react";
-import Loading from "./loading";
+
 
 
 // async function getdoctors() {
@@ -32,7 +32,7 @@ async function getdoctor(params: any) {
 export default async function Home() {
   // const doctors = await getdoctors()
   // console.log(doctors)
-  
+  await new Promise(reslove => setTimeout(reslove, 3000))
   const data = [
     {
       id: 1,
@@ -118,16 +118,16 @@ export default async function Home() {
 
       {/* <Hero /> */}
       {/* <Advert /> */}
-      <Homebooking />
-      <div className="md:grid grid-cols-3 gap-4 ">
+      {/* <Homebooking /> */}
+      <div className="md:grid grid-cols-2 gap-4 ">
         <div className="col-span-2">
           {/* <Labbooking doctors={doctors}/> */}
-          <Suspense fallback={null}>
+      
                <Booking  />
-          </Suspense>
+
        
         </div>
-        <News_section />
+        {/* <News_section /> */}
         {/* <HorizontalScroll users={data}/> */}
       </div>
     </main>

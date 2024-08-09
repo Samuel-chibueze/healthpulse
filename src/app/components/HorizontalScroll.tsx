@@ -1,9 +1,10 @@
 "use client";
 
-import React from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import image1 from "../images/default_profile_photo.jpg";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 interface User {
   id: number;
@@ -12,7 +13,6 @@ interface User {
   verified: boolean;
   image: string;
   description: string;
-  support: string;
   responsive: string;
   price: number;
   rating: number;
@@ -24,13 +24,48 @@ interface BookingProps {
 }
 
 const HorizontalScroll: React.FC<BookingProps> = ({ users }) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -300,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 300,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
-    <div className="container mx-auto px-10 py-10 w-full">
-     
-      <div className="flex overflow-x-auto space-x-4 py-2 px-4 -mx-4 scrollbar-hide">
+    <div className="relative container mx-auto px-10 py-10 w-full">
+      {/* Scroll Buttons */}
+      <button
+        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-gray-200 rounded-full shadow-md hover:bg-gray-300"
+        onClick={scrollLeft}
+      >
+        <FaArrowLeft size={20} />
+      </button>
+
+      <button
+        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-gray-200 rounded-full shadow-md hover:bg-gray-300"
+        onClick={scrollRight}
+      >
+        <FaArrowRight size={20} />
+      </button>
+
+      {/* User Cards */}
+      <div ref={scrollContainerRef} className="flex overflow-x-auto space-x-4 py-2 px-4 -mx-4 scrollbar-hide">
         {users.map((user) => (
           <Link key={user.id} href={`/profile/${user.id}`} passHref>
-            <div className="min-w-[300px] bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md">
+            <div className="min-w-[300px] bg-white border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
               <div className="relative">
                 <Image
                   width={240}

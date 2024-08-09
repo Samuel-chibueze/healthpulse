@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Image1 from "../images/logo_img.png"
 import BackgroundImage from '../images/find-doctor.png'
+import Doctor from '@/app/images/booking-doctor.png'
+import Lab from "@/app/images/booking-lab.png"
 
 
 export default function BookingPage() {
@@ -11,21 +13,21 @@ export default function BookingPage() {
       className='flex flex-col px-4 md:px-20 lg:px-32 justify-center items-center min-h-[150vh] md:h-[120vh] bg-cover bg-center'
       style={{ backgroundImage: `url(${BackgroundImage.src})` }}
     >
-      <div className='w-full  flex flex-col justify-center gap-7 rounded-md py-8 items-center px-6 shadow-xl bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg' >
+      <div className='w-full  flex flex-col justify-center gap-7 rounded-md py-8 items-center px-6 shadow-xl bg-white  backdrop-filter backdrop-blur-lg' >
         <h1 className='text-4xl font-bold mb-2 text-center'>Book a Session</h1>
         <p className='text-lg text-center text-blue-600 mb-4'>Choose a service below to book your appointment.</p>
 
         <Link href={'/doctors'}>
           <div className='rounded-md bg-gradient-to-r from-[#4576BC] via-[#4576BC] to-[#4576BC] shadow-lg h-[15vh] md:w-[40vw] w-[80vw] flex justify-between items-center px-8 transform transition-transform hover:scale-105 hover:shadow-2xl duration-300'>
             <p className='text-xl font-bold italic text-white'>Book a Doctor</p>
-            <Image src={Image1} height={70} width={80} alt='doctor image' className='rounded-full border-2 border-white shadow-md' />
+            <Image src={Doctor} height={90} width={100} alt='doctor image' className='rounded-full border-2 border-white shadow-md' />
           </div>
         </Link>
 
         <Link href={'/labs'}>
           <div className='rounded-md bg-gradient-to-r from-[#4576BC] via-[#4576BC] to-[#4576BC] shadow-lg h-[15vh] md:w-[40vw] w-[80vw] flex justify-between items-center px-8 transform transition-transform hover:scale-105 hover:shadow-2xl duration-300'>
             <p className='text-xl font-bold italic text-white'>Book a Lab</p>
-            <Image src={Image1} height={70} width={80} alt='lab image' className='rounded-full border-2 border-white shadow-md' />
+            <Image src={Lab} height={90} width={100} alt='lab image' className='rounded-full border-2 border-white shadow-md' />
           </div>
         </Link>
 

@@ -1,5 +1,7 @@
-'use client';
 
+'use client';
+import { z } from 'zod';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Image1 from '../images/signup-cover.jpeg';
 import Logo from '../images/logo_img.png';
 import Image from 'next/image';
@@ -8,9 +10,6 @@ import { redirect, useRouter } from 'next/navigation';
 import { FcGoogle } from 'react-icons/fc';
 import Link from 'next/link';
 import ReactFlagsSelect from 'react-flags-select';
-import { FaRegEye } from "react-icons/fa6";
-import { FaRegEyeSlash } from "react-icons/fa6";
-import { z } from 'zod';
 import { SignupAction } from '@/app/serveractions';
 import { useState, useEffect, useRef } from 'react';
 import Button from './button';
@@ -22,9 +21,15 @@ const FormSchema = z.object({
   firstname: z.string().min(2, 'Your first name is too short').max(20, 'Your first name is too long'),
   lastname: z.string().min(2, 'Your last name is too short').max(20, 'Your last name is too long'),
   email: z.string().email('Invalid email address'),
-  phonenumber: z.string().min(7, 'Your phone number is too short').max(15, 'Your phone number is too long'),
+  phonenumber: z.string()
+  .min(7, { message: 'Your phone number is too short' })
+  .max(15, { message: 'Your phone number is too long' }),
   gender: z.string().min(1, 'You have not added your Gender'),
   password: z.string().min(5, 'Your password is too short').max(20, 'Your password is too long'),
+  confirm_password: z.string().min(5, 'Your password is too short').max(20, 'Your password is too long'),
+}).refine(data => data.password === data.confirm_password, {
+  message: 'Passwords do not match',
+  path: ['confirm_password'],
 });
 
 export default function SignupForm() {
@@ -37,6 +42,9 @@ export default function SignupForm() {
   const [contact_info_error_msg, setcontact_info_error_msg] = useState<string>('');
   const [gender_error_msg, setgender_error_msg] = useState<string>('');
   const [password_error_msg, setpassword_error_msg] = useState<string>('');
+  const [confirm_password_error_msg, setconfirm_password_error_msg] = useState<string>('');
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState<boolean>(false);
 
   const remove_error = () => {
     setfirstname_error_msg('');
@@ -45,6 +53,7 @@ export default function SignupForm() {
     setcontact_info_error_msg('');
     setgender_error_msg('');
     setpassword_error_msg('');
+    setconfirm_password_error_msg('');
   };
 
   const router = useRouter();
@@ -58,6 +67,7 @@ export default function SignupForm() {
       phonenumber: formData.get('phonenumber'),
       gender: formData.get('gender'),
       password: formData.get('password'),
+      confirm_password: formData.get('confirm_password'),
     };
 
     const result = FormSchema.safeParse({
@@ -67,6 +77,7 @@ export default function SignupForm() {
       phonenumber: newform.phonenumber?.toString() || '',
       gender: newform.gender?.toString() || '',
       password: newform.password?.toString() || '',
+      confirm_password: newform.confirm_password?.toString() || '',
     });
 
     if (result.success) {
@@ -86,10 +97,7 @@ export default function SignupForm() {
 
       if (data?.success) {
         toast.success(data?.message);
-      
           router.push('/booking');
-     
-
         // Reset the form after submission
         if (formRef.current) {
           formRef.current.reset();
@@ -104,22 +112,31 @@ export default function SignupForm() {
         message: issue.message,
       }));
 
-      console.log(errordetails);
+    
       const message = result.error.issues[0].message;
       const path = result.error.issues[0].path[0];
 
       if (path === 'firstname') {
         setfirstname_error_msg(message);
+        setTimeout(() => {remove_error()}, 3000);
       } else if (path === 'lastname') {
         setlastname_error_msg(message);
+        setTimeout(() => {remove_error()}, 3000);
       } else if (path === 'email') {
         setemail_error_msg(message);
+        setTimeout(() => {remove_error()}, 3000);
       } else if (path === 'gender') {
         setgender_error_msg(message);
+        setTimeout(() => {remove_error()}, 3000);
       } else if (path === 'phonenumber') {
         setcontact_info_error_msg(message);
+        setTimeout(() => {remove_error()}, 3000);
       } else if (path === 'password') {
         setpassword_error_msg(message);
+        setTimeout(() => {remove_error()}, 3000);
+      } else if (path === 'confirm_password') {
+        setconfirm_password_error_msg(message);
+        setTimeout(() => {remove_error()}, 3000);
       }
 
       console.log(path, message);
@@ -130,7 +147,7 @@ export default function SignupForm() {
     <form
       ref={formRef}
       action={handlesubmit}
-      className=" flex flex-col justify-center items-center bg-white rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh]"
+      className="mt-[-170px] md:mt-0 lg:py-10 lg:px-8 relative flex flex-col justify-center items-center bg-white rounded-md w-[75vw] md:w-[30vw] h-[60vh] md:h-[100vh]"
     >
       <h1 className="lg:text-2xl text-2xl font-semibold mb-6">Sign up</h1>
       <p className="text-xl pt-4 pb-10">Hey friend! Welcome to healthpulse</p>
@@ -201,28 +218,42 @@ export default function SignupForm() {
         </div>
       </div>
 
-      <div className="w-full">
+      <div className="w-full relative">
         <label htmlFor="password" className="mb-1 block font-bold">
           Password
         </label>
         <input
-          type="password"
+          type={passwordVisible ? 'text' : 'password'}
           name="password"
           className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
+        <div
+          className="absolute top-12 right-4 cursor-pointer text-xl text-blue-600"
+          onClick={() => setPasswordVisible(!passwordVisible)}
+        >
+          {passwordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+        </div>
         <p className="text-red-600 text-md py-2 ml-5">{password_error_msg}</p>
       </div>
-      <div className="w-full">
-        <label htmlFor="password" className="mb-1 block font-bold">
-         confirm Password
+
+      <div className="w-full relative">
+        <label htmlFor="confirm_password" className="mb-1 block font-bold">
+          Confirm Password
         </label>
         <input
-          type="password"
+          type={confirmPasswordVisible ? 'text' : 'password'}
           name="confirm_password"
           className="h-12 mt-2 px-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
-        <p className="text-red-600 text-md py-2 ml-5">{password_error_msg}</p>
+        <div
+          className="absolute top-12 right-4 cursor-pointer text-xl text-blue-600"
+          onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+        >
+          {confirmPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+        </div>
+        <p className="text-red-600 text-md py-2 ml-5">{confirm_password_error_msg}</p>
       </div>
+
       <Button />
       <div className="uk-heading-line uk-text-center py-2">
         <span>Or</span>

@@ -16,22 +16,10 @@ export default function signupForm({ params }: any) {
 
 
         <div
-            className="mx-auto  bg-cover h-[200vh] md:h-[170vh]  w-full grid md:grid-cols-2 grid-cols-1 gap-5  bg-white"
-        // style={{ backgroundImage: `url(${Image1.src})` }}
-        >
+            className="mx-auto  bg-cover h-[160vh] md:h-[170vh]  w-full grid md:grid-cols-2 grid-cols-1 gap-5  bg-white ">
+        {/* style={{ backgroundImage: `url(${Image1.src})` }} */}
             <div className='flex flex-col justify-center items-center '>
-                <div>
-                    <Link href="/">
-                        <Image
-                            width={350}
-                            height={75}
-                            src={Logo}
-                            alt={"image"}
-                            className="w-full h-48 object-cover"
-                        />
-                    </Link>
-
-                </div>
+            
                 <Signupform />
             </div>
             <div className=' md:flex flex-col justify-center items-center  md:order-0 md:visible hidden'>

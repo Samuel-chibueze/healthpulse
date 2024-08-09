@@ -7,6 +7,8 @@ import { Redirect } from 'next';
 import Dash_profile_render from '../../components/dash_profile_render'
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
+import logoutroute from '@/app/serveractions';
+
 
 async function getdetails(){
     const user = cookies().get('user_id')?.value;
@@ -24,15 +26,37 @@ async function getdetails(){
 
 }
 
+async function validatebooking(){
+    const session = cookies().get('session')?.value
+    const rooturl = "http://127.0.0.1:8000/api"
+    const res = await fetch(`${rooturl}/validatebooking/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session}`
+        },
+    })
+
+    const data = await res.json()
+
+    if(res.status === 200){
+    return true
+    }else{
+    return false
+    }
+}
+
 export default async function Profile() {
     await new Promise(reslove => setTimeout(reslove, 3000))
     const user = cookies().get('user_id')?.value;
-    const session = await getSession()
+    const session = await validatebooking()
     if(session){
        const data = await getdetails()  
        console.log(data)  
     }else{
+      
      redirect('/accounts/sign-in')
+
     }
     
  

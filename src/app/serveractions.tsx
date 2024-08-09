@@ -133,37 +133,39 @@ export async function SigninAction(formData: FormData) {
 }
 
 
-export async function handleupdatepatientinfo(user_id:number,formData:FormData) {
-   const id = user_id 
-    const firstname = formData.get('firstname') as string;
-    const lastname = formData.get('lastname') as string;
-    const email = formData.get('email') as string;
-    const country = formData.get('country') as string;
-    const city = formData.get('city') as string;
-    const Date_of_birth = formData.get('dateOfBirth') as string;
-    const Gender = formData.get('gender') as string;
-    const Contact_info = formData.get('contactInfo') as string;
-    const Address = formData.get('address') as string;
+export async function handleupdatepatientinfo(user:any,form:any) {
+   const id = user
+    const first_name = form.first_name as string || '';
+    const last_name = form.last_name as string || ''
+    const email = form.email as string|| ''
+    const country = form.country as string|| ''
+    const city = form.city as string || ''
+    const Date_of_birth = form.Date_0f_birth as string|| ''
+    const Gender = form.Gender as string|| ''
+    const phone_number = form.phone_number as string|| ''
+    const Address = form.Address as string|| ''
 
-    console.log(firstname,lastname,email,country,city,Date_of_birth,Gender,Contact_info,Address, user_id)
+    console.log(id,first_name,last_name,email,country,city,Date_of_birth,Gender, phone_number,Address)
 
 
     try {
-        const res = await fetch(`${rooturl}/patient_personal_info/${user_id}/`, {
+        const res = await fetch(`${rooturl}/patient_personal_info/${user}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"id":id,"firstname":firstname,"lastname":lastname,"email":email,"country":country,"city":city,"Date_of_birth":Date_of_birth,"Gender":Gender,"Contact_info":Contact_info,"Address":Address})
+            body: JSON.stringify({"firstname":first_name,"lastname":last_name,"email":email,"country":country,"city":city,"Date_of_birth":Date_of_birth,"Gender":Gender,"Contact_info":phone_number,"Address":Address})
         });
 
         const data = await res.json()
         if (res.status === 200){
-         const {user} = data
+     
+         console.log(data)
          return{"success": true}
         
         }else{
-            console.log('data not acceptable',data)
+            console.log(data)
+            return{"success": false}
         }
        
     } catch (error) {
@@ -202,6 +204,75 @@ export async function validatebooking(){
     }else{
         logoutroute()
       return {"show_model":false}
+    }
+}
+
+
+export async function add_booking(formData:FormData){
+
+      
+  
+       const  patient= formData.get('patient') 
+       const  doctor= formData.get('doctor') 
+      const booking_type= formData.get('booking_type') 
+      const date= formData.get('date') 
+      const time= formData.get('time')
+
+      
+
+     
+
+    try {
+        const res = await fetch(`${rooturl}/booking/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(doctor)
+        });
+
+        const data = await res.json();
+        console.log(res.status)
+
+       
+        if (res.status === 201) {
+            console.log(data);
+            const {
+                message= "No message",
+                token: { access, user }
+            } = data;
+
+            console.log(access);
+            console.log(message);
+
+            // Setting cookies
+            cookies().set('session', access);
+            cookies().set('user_id', user);
+
+            // Redirecting to the home page
+         
+            const msg = data.message
+
+            return({"message":msg, "success":true})
+            
+        
+        } else {
+            console.log(data)
+            const { email = [], password = [] } = data || {};
+
+    if (email) {
+        console.log(email)
+        return({"message":email[0], "success":false})
+    
+    } if(password) {
+        return({"message":password[0], "success":false})
+
+    }
+        }
+    } catch (error) {
+       
+        // Handle errors
+
     }
 }
  

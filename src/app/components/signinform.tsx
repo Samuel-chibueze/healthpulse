@@ -72,8 +72,7 @@ export default function signinform() {
             { path === "email" ? setemail_error_msg(message) : setpassword_error_msg(message) }
         setTimeout(()=>{
           setemail_error_msg('')
-          setpassword_error_msg('')
-        },3000);
+setpassword_error_msg('')},3000);
            
         }
     }
@@ -85,18 +84,7 @@ export default function signinform() {
 
     return (
         <form action={handlesubmit} className="lg:py-10 lg:px-8  space-y-3 relative flex flex-col justify-center items-center bg-white  rounded-md w-[75vw] md:w-[30vw] h-[120vh] md:h-[100vh] ">
-            <div>
-                <Link href="/">
-                    <Image
-                        width={500}
-                        height={100}
-                        src={Logo}
-                        alt={"image"}
-                        className="w-full h-48 object-cover"
-                    />
-                </Link>
-
-            </div>
+       
             <h1 className="lg:text-2xl text-2xl font-semibold mb-6">Sign in</h1>
             <p className='text-xl pt-4 pb-10'>Hey friend! Welcome back</p>
             <div className="w-full">

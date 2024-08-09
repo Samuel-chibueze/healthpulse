@@ -5,6 +5,7 @@ import Image1 from "../../images/default_profile_photo.jpg"
 import Bookingmodel from '@/app/components/bookingmodel';
 import Bookingsection from '@/app/components/bookingsection';
 import HorizontalScroll from '@/app/components/HorizontalScroll';
+import { cookies } from 'next/headers';
 // async function getdoctor(params: any) {
 //   await new Promise(reslove => setTimeout(reslove, 3000))
 //   // const res = await fetch(`http://127.0.0.1:8000/api/profile/5`, { cache: 'no-store' })
@@ -19,7 +20,11 @@ import HorizontalScroll from '@/app/components/HorizontalScroll';
 
 export default async function Profile({ params }: any) {
 
-  console.log(params)
+  const patientid = cookies().get('user_id')?.value as string
+  const doctor = parseInt(params.user_id)
+  const patient = parseInt(patientid)
+ 
+  
 
   const dummydata = [
     {
@@ -114,7 +119,7 @@ export default async function Profile({ params }: any) {
 
     <main className="md:grid grid-cols-3 md:gap-8 gap-20 container mx-auto py-8 mt-24 px-2  md:px-10 bg-gray-100">
 
-      <Bookingmodel />
+      <Bookingmodel  doctorid={doctor} patientid={patient}/>
 
       {/* Main Content */}
       <div className="col-span-2 bg-white shadow-md rounded-lg ">
@@ -169,7 +174,7 @@ export default async function Profile({ params }: any) {
           <h2 className="text-2xl font-bold text-gray-800 mb-4 "></h2>
 
 
-          {/* <HorizontalScroll users={dummydata} /> */}
+           <HorizontalScroll users={dummydata} />
 
 
         </div>
@@ -178,7 +183,7 @@ export default async function Profile({ params }: any) {
       {/* Sidebar */}
       <aside className="col-span-1 w-50 mt-10 md:mt-0">
         <div className="md:space-y-5 space-y-2">
-        <Bookingsection/>
+        <Bookingsection userid={params.user_id}/>
 
           <div className="bg-white shadow rounded-md p-5">
             <div className="grid grid-flow-col gap-2">

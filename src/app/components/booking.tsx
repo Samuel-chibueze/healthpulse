@@ -113,9 +113,9 @@ const Booking: React.FC = () => {
 
 
     return (
-        <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold text-center mb-8">Available Services</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="container mx-auto xl:px-60 lg:px-40 px-8 py-8">
+            <h1 className="text-3xl font-bold text-center mb-8">Available Doctors</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
                 {data.map((user) => (
             <Link href={`/profile/${user.id}`}>
                         <div
@@ -124,12 +124,11 @@ const Booking: React.FC = () => {
                         >
                             <div className="relative">
                                 <Image
-                                   width={240}
-                                   height={300}
+                                
                                    
                                     src={Image1}
                                     alt={user.name}
-                                    className="w-full object-cover"
+                                    className="w-full h-[35vh] object-cover"
                                 />
                                 {user.verified && (
                                     <div className="absolute top-0 right-0 bg-green-500 text-white px-2 py-1 m-2 rounded-md text-xs font-semibold">
